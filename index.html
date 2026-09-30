@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Пинск и Пинский район. Геноцид 1941–1952 — Исторический архив</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@400;500;600;700;800&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/mainfinal.css">
+    <link href="https://unpkg.com/@csstools/normalize.css" rel="stylesheet">
+</head>
+<body>
+  <!-- ПРОГРЕСС-БАР -->
+  <div id="reading-progress"></div>
+  <!-- ВЕРХНЯЯ СТИЛЬНАЯ ПАНЕЛЬ С КНОПКОЙ «ТРИ ПОЛОСОЧКИ» И ТЕКУЩЕЙ ГЛАВОЙ -->
+  <div class="top-header-bar">
+    <button class="hamburger-btn" onclick="toggleSidebarDrawer()" title="Открыть панель навигации">
+      <div class="hamburger-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <span>Меню архива</span>
+    </button>
+    <div class="header-current-tab" id="header-current-title">
+      Авторы и План «Ост»
+    </div>
+    <div class="header-quick-actions">
+      <button class="btn-toc-toggle" onclick="toggleTOC()" title="Показать или скрыть оглавление главы">
+        <span>📑 Оглавление главы</span>
+        <span id="header-toc-indicator">▾</span>
+      </button>
+    </div>
+  </div>
+  <!-- ЛЕВОЕ ВЫДВИЖНОЕ МЕНЮ (БОКОВОЙ КОНТЕЙНЕР НАВИГАЦИИ) -->
+  <div class="drawer-overlay" id="drawer-overlay" onclick="closeSidebarDrawer()"></div>
+  <aside class="sidebar-drawer" id="sidebar-drawer">
+    <div class="drawer-header">
+      <h3>Меню архива</h3>
+      <button class="drawer-close-btn" onclick="closeSidebarDrawer()" title="Закрыть">×</button>
+    </div>
+    <div class="drawer-content">
+      <!-- ИНСТРУМЕНТЫ -->
+      <div class="drawer-section-title">Инструменты и поиск</div>
+      <button class="drawer-nav-btn" onclick="openSearchModal(); closeSidebarDrawer();" style="margin-bottom: 10px; background: rgba(168,28,28,0.25); border-color: var(--crimson-red);">
+        <span>🔍 Поиск по архиву (Ctrl+K)</span>
+        <span>⏎</span>
+      </button>
+      <div class="drawer-tools-row">
+        <button class="drawer-tool-btn" onclick="adjustFontSize(-0.1)">A-</button>
+        <button class="drawer-tool-btn" onclick="adjustFontSize(0)">Норма</button>
+        <button class="drawer-tool-btn" onclick="adjustFontSize(0.1)">A+</button>
+      </div>
+      <div class="drawer-tools-row">
+        <button class="drawer-tool-btn" onclick="toggleTheme()" id="theme-toggle-btn" style="flex: 1;">🌓 Тема чтения</button>
+      </div>
+      <!-- ВНЕШНИЕ АРХИВНЫЕ ИСТОЧНИКИ -->
+      <div class="drawer-section-title">Внешние источники и базы данных</div>
+      <a href="https://prokuratura.gov.by" target="_blank" rel="noopener" class="drawer-external-link">↗ Генеральная прокуратура РБ</a>
+      <a href="https://archives.gov.by" target="_blank" rel="noopener" class="drawer-external-link">↗ Национальный архив РБ</a>
+      <a href="https://www.yadvashem.org" target="_blank" rel="noopener" class="drawer-external-link">↗ Мемориальный комплекс Яд Вашем</a>
+      <!-- ГЛАВЫ И РАЗДЕЛЫ КНИГИ -->
+      <div class="drawer-section-title">Главы и разделы книги</div>
+      <div class="drawer-btn-grid" id="drawer-nav-list">
+        <button class="drawer-nav-btn active" onclick="switchTab('tab-intro', this)">1. Авторы и План «Ост»</button>
+        <button class="drawer-nav-btn" onclick="switchTab('tab-war', this)">2. Начало войны и Оборона</button>
+        <button class="drawer-nav-btn" onclick="switchTab('tab-occupation', this)">3. Оккупация и Лагеря</button>
+        <button class="drawer-nav-btn" onclick="switchTab('tab-holocaust', this)">4. Трагедия евреев и Гетто</button>
+        <button class="drawer-nav-btn" onclick="switchTab('tab-posenichi', this)">5. Посеничи и Жертвы</button>
+        <button class="drawer-nav-btn" onclick="switchTab('tab-heroes', this)">6. Праведники и Остарбайтеры</button>
+        <button class="drawer-nav-btn" onclick="switchTab('tab-villages', this)">7. Любель-Поль и Сестры Хатыни</button>
+        <button class="drawer-nav-btn" onclick="switchTab('tab-witnesses', this)">8. Показания очевидцев ЧГК</button>
+        <button class="drawer-nav-btn" onclick="switchTab('tab-nuremberg', this)">9. Нюрнбергский трибунал</button>
+        <button class="drawer-nav-btn" onclick="switchTab('tab-postwar', this)">10. Бандитизм ОУН-УПА (1944–1952)</button>
+        <button class="drawer-nav-btn" onclick="switchTab('tab-investigation', this)">11. Следствие Генпрокуратуры</button>
+        <button class="drawer-nav-btn" onclick="switchTab('tab-memorial', this)">12. Но помнит мир спасённый</button>
+      </div>
+    </div>
+  </aside>
+  <!-- HERO COVER (ОБЛОЖКА КНИГИ) -->
+  <header class="hero-cover">
+    <div class="hero-title-sub">Пинск и Пинский район</div>
+    <h1 class="hero-title-main">ГЕНОЦИД</h1>
+    <div class="hero-date-badge">1941–1952</div>
+    <p class="hero-meta-lead">
+      Историко-документальное издание о злодеяниях нацистских оккупантов, их пособников и бандформирований на Пинской земле
+    </p>
+  </header>
+  <!-- ОТДЕЛЬНАЯ ТЕМНАЯ СЕКЦИЯ ДЛЯ ОГЛАВЛЕНИЯ (ПОЛНОСТЬЮ ВНЕ ТЕКСТА КНИГИ И ПЕРГАМЕНТНЫХ СТРАНИЦ) -->
+  <section class="dark-toc-section">
+    <div class="dark-toc-container">
+      <div class="collapsible-toc-wrapper" id="collapsible-toc">
+        <div class="collapsible-toc-header" onclick="toggleTOC()">
+          <div class="collapsible-toc-title">
+            <span>📑 Содержание текущей главы (нажмите для открытия / закрытия)</span>
+          </div>
+          <div class="collapsible-toc-arrow">▼</div>
+        </div>
+        <div class="collapsible-toc-body">
+          <ul class="toc-list" id="dynamic-toc">
+            <!-- Генерируется динамически через JS при выборе главы -->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ОСНОВНОЙ СТРУКТУРИРОВАННЫЙ ЛЕЙАУТ С КНИГОЙ -->
+  <div class="main-layout">
+    <main id="content-container">
+      <!-- ================= ГЛАВА 1: АВТОРЫ И ПЛАН ОСТ ================= -->
+      <section id="tab-intro" class="book-page active">
+        <h2 class="chapter-title" id="sec-authors">Авторы и План «Ост»</h2>
+        <div class="authors-card">
+          <h3>Авторы:</h3>
+          <div class="author-item"><strong>Бушик Юрий Геннадьевич</strong>, директор ГУО «Средняя школа №6 г. Пинска»;</div>
+          <div class="author-item"><strong>Еленская Ирина Эдуардовна</strong>, доцент кафедры социально-гуманитарных дисциплин УО «Полесский государственный университет», кандидат исторических наук;</div>
+          <div class="author-item"><strong>Оржеховский Александр Владимирович</strong>, старший научный сотрудник ГУ «Музей Белорусского Полесья»;</div>
+          <div class="author-item"><strong>Розенблат Евгений Семенович</strong>, Доцент кафедры всеобщей истории УО «Брестский государственный университет имени А.С. Пушкина», кандидат исторических наук;</div>
+          <div class="author-item"><strong>Ярошевич Леонид Александрович</strong>, старший преподаватель кафедры социально-гуманитарных дисциплин УО «Полесский государственный университет».</div>
+        </div>
+        <div class="barbed-wire"></div>
+        <h3 class="section-title" id="sec-ost">План «Ост»</h3>
+        <p>
+          «Генеральный план «Ост» - нацистский план колонизации и германизации оккупированных земель Восточной Европы, включая захваченные территории СССР, основанный на «расовой доктрине» и теории жизненного пространства». По замыслам нацистского руководства, подлежащие онемечиванию белорусы должны были со временем утратить собственное национальное сознание и свою идентичность с белорусской нацией.
+        </p>
+        <!-- КОНТЕЙНЕР: СТРАНИЦА 13 КАРТИНКА -->
+<div class="insert-container pic">
+  <div class="insert-badge">Иллюстративный материал</div>
+  <div class="insert-content-title">План «Ост» и нацистская директива</div>
+  
+  <img src="image/13.jpg" 
+       alt="План Ост — Памятка немецкого солдата" 
+       class="book-img" 
+       style="max-width: 100% !important; max-height: 520px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; border-radius: 3px; box-shadow: 0 5px 20px rgba(0,0,0,0.35);">
+
+  <div class="insert-text-desc" style="text-align: center; margin-top: 10px;">
+    «У тебя нет сердца и нервов, на войне они не нужны. Уничтожь в себе жалость и сострадание, убивай всякого русского...» — из «Памятки немецкого солдата».
+  </div>
+</div>
+      </section>
+      <!-- ================= ГЛАВА 2: НАЧАЛО ВОЙНЫ И ОБОРОНА ================= -->
+      <section id="tab-war" class="book-page">
+        <h2 class="chapter-title" id="sec-war-start">Начало войны</h2>
+
+        <h3 class="section-title" id="sec-zhabchitsy">Авиаудар по аэродрому в Жабчицах</h3>
+        <p>
+          Город Пинск и Пинщина одни из первых попали под удар военной машины нацистской Германии. Согласно справке местных органов власти, от бомбежки немецкой авиации в ходе авианалетов 22 июня 1941 г. в Жабчицах было сожжено 40 крестьянских домов, погибло 30 местных жителей. Эти данные отражены в актах расследования злодеяний немецких-фашистских захватчиков и их пособников.
+        </p>
+        <p>
+          Населенный пункт Жабчицы стал первой сожжённой деревней на Пинщине и в числе первых отмечен «огненной точкой» в мрачной хронике военных преступлений нацистов на территории всего Советского Союза.
+        </p>
+
+        <!-- КОНТЕЙНЕР: СТРАНИЦЫ 20-21 СПРАВКА (ДВУСТОРОННИЙ ДОКУМЕНТ) -->
+        <div class="insert-container doc">
+          <div class="insert-badge">Архивный документ</div>
+          <div class="insert-content-title">Справка Жабчицкого сельсовета следственным органам МВД СССР</div>
+          
+          <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin: 15px 0;">
+            <img src="image/20.jpg" 
+                 alt="Справка по сожжению д. Жабчицы — лицевая сторона (стр. 20)" 
+                 class="book-img" 
+                 style="max-width: 48% !important; min-width: 260px; max-height: 480px !important; width: auto !important; height: auto !important; display: block; margin: 0 auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+            
+            <img src="image/21.jpg" 
+                 alt="Справка по сожжению д. Жабчицы — оборотная сторона (стр. 21)" 
+                 class="book-img" 
+                 style="max-width: 48% !important; min-width: 260px; max-height: 480px !important; width: auto !important; height: auto !important; display: block; margin: 0 auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+          </div>
+
+          <div class="insert-text-desc" style="text-align: center; margin-top: 10px;">
+            Акт-справка о сожжении фашистской авиацией 40 домов в Жабчицах 22 июня 1941 г. и повторном уничтожении 180 дворов и школы в августе 1944 г.
+          </div>
+        </div>
+
+        <h3 class="section-title" id="sec-first-strike">Первый налет на Пинск</h3>
+        <p>
+          В журнале боевых действий Западного фронта за 22 июня 1941 г. первый авианалет 9 вражеских бомбардировщиков на город Пинск зафиксирован в 9.56 – фашисты сбросили смертоносный груз на Пинский судоремонтный завод, имевший важное значение в оборонно-мобилизационных мероприятиях. Жертвами бомбардировки стало гражданское население – рабочие завода. Двое были ранены, а молодой рабочий Дмитрий Павликовский погиб.
+        </p>
+        <p>
+          Немецкая авиация бомбила конкретные объекты в городе Пинске и его окрестностях, имевшие важное военно-стратегическое значение.
+        </p>
+
+        <!-- КОНТЕЙНЕР: ВОЕННАЯ КАРТА БЕЛАРУСИ СТР. 23 -->
+        <div class="insert-container pic">
+          <div class="insert-badge">Карта боевых действий</div>
+          <div class="insert-content-title">Военные карты Беларуси. Аэрофотосъемка Люфтваффе окрестности Пинска</div>
+          
+          <img src="image/23.jpg" 
+               alt="Военная карта района Пинска Bildrand 1:300 000" 
+               class="book-img" 
+               style="max-width: 100% !important; max-height: 520px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; border: 1px solid var(--border-wire); box-shadow: 0 5px 20px rgba(0,0,0,0.35);">
+
+          <div class="insert-text-desc" style="text-align: center; margin-top: 10px;">
+            Немецкая оперативная карта района г. Пинска (Stabsbildabteilung, масштаб 1:300 000) с сеткой разведывательных квадратов.
+          </div>
+        </div>
+
+        <h3 class="section-title" id="sec-korzh">Оборона Пинска. Начало партизанской войны</h3>
+        <p>
+          В начале Великой Отечественной войны именно в городе Пинске был создан самый первый партизанский отряд на территории Советского Союза под командованием В.З. Коржа.
+        </p>
+        <p>
+          Вокруг Василия Захаровича Коржа собрались партийные и комсомольские активисты: Г.С. Карасев, Ф.С. Куньков, С.Г. Корнилов, В.З. Хоружая, комсомольцы Ш.И. Беркович, И.И. Чуклай, Э.Б. Нордман, В. Лифантьев и другие. Название отряд получил по псевдониму Коржа – «Комаров».
+        </p>
+        <p>
+          Первый бой партизаны приняли 28 июля 1941 г.
+        </p>
+
+        <!-- КОНТЕЙНЕР: ФОТКА КОРЖА -->
+        <div class="insert-container pic">
+          <div class="insert-badge">Фотодокумент</div>
+          <div class="insert-content-title">Василий Захарович Корж («Комаров»)</div>
+          
+          <img src="image/31.jpg" 
+               alt="Василий Захарович Корж" 
+               class="book-img img-small" 
+               style="max-width: 320px !important; max-height: 420px !important; width: 100% !important; height: auto !important; display: block; margin: 15px auto; border-radius: 3px; border: 1px solid var(--border-wire); box-shadow: 0 5px 20px rgba(0,0,0,0.4);">
+
+          <div class="insert-text-desc" style="text-align: center; margin-top: 10px;">
+            Герой Советского Союза, легендарный командир Пинского партизанского соединения В.З. Корж.
+          </div>
+        </div>
+      </section>
+      <!-- ================= ГЛАВА 3: ОККУПАЦИЯ И ЛАГЕРЯ ================= -->
+      <section id="tab-occupation" class="book-page">
+        <h2 class="chapter-title" id="sec-occupation">Оккупация Пинска</h2>
+        <p>
+          Первые немецкие части вошли в Пинск 4 июля 1941 года, а на следующий день – 45-я пехотная дивизия под командованием генерал-майора Шлиппера.
+        </p>
+        <p>
+          С 27 июля 1941 года в Пинске находилась и 293-я пехотная дивизия вермахта под командованием полковника Фроста.
+        </p>
+
+        <h3 class="section-title" id="sec-genocide-general">Геноцид населения и уничтожение военнопленных</h3>
+        <p>
+          Во мраке темного времени нацистской оккупации Пинская земля пребывала 1112 дней – более 3 лет жизни под ярмом нацистских нелюдей и их пособников. По последним данным, в годы фашистской оккупации на территории нынешнего Пинского региона, в состав которого в 40-50-е годы входило большинство деревень Логишинского района и половина деревень Жабчицкого района, было уничтожено около 60 тысяч человек. Более 12,5 тыс. жителей тогдашнего Пинского района стали жертвами так называемого «нового порядка».
+        </p>
+
+        <h3 class="section-title" id="sec-new-order">«Новый порядок»</h3>
+        <p>
+          Пинск и его окрестности со статусом округа включили в рейхкомиссариат «Украина». Одним из первых мероприятий оккупационных властей стала регистрация жителей.
+        </p>
+
+        <!-- КОНТЕЙНЕР: КАРТИНКА СТР. 40 -->
+        <div class="insert-container pic">
+          <div class="insert-badge">Фотодокумент зверств</div>
+          <div class="insert-content-title">Жертвы оккупационного «нового порядка»</div>
+          
+          <img src="image/40.jpg" 
+               alt="Тела расстрелянных нацистами мирных жителей и детей" 
+               class="book-img" 
+               style="max-width: 100% !important; max-height: 480px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 18px rgba(0,0,0,0.35);">
+
+          <div class="insert-text-desc" style="text-align: center; margin-top: 10px;">
+            Безвинные жертвы нацистского террора — расстрелянные фашистскими палачами советские дети.
+          </div>
+        </div>
+
+        <p>
+          В годы оккупации на Пинщине было создано три гетто: самое большое - в городе Пинске, а также в Погосте-Загородском и Логишине. Уничтожение нацистами и их пособниками мирных жителей и военнопленных производилось в разных местах, в основном на территории Пинского района.
+        </p>
+        <p>
+          Многочисленные места захоронения, обнаруженные после войны специальной комиссией в окрестностях города Пинска, свидетельствует о планомерном умерщвлении фашистскими палачами населения города, в том числе женщин, детей и стариков. Немцы на территории г. Пинска и Пинского района совершали чудовищные преступления: подвергали сожжению на кострах вместе с трупами живых людей. Приводили на кладбище тысячи советских граждан, снимали с них одежду, а затем натравливали специально дрессированных собак, которые бросались на людей и рвали их тела в клочья. Жертвы истекали кровью и погибали.
+        </p>
+
+        <!-- КОНТЕЙНЕР: СТРАНИЦЫ 42-43 (СПАРЕННЫЙ БЛОК) -->
+        <div class="insert-container doc">
+          <div class="insert-badge">Исторические материалы</div>
+          <div class="insert-content-title">Судьба советских военнопленных и попрание Женевской конвенции</div>
+          
+          <div style="display: flex; gap: 15px; justify-content: center; align-items: stretch; flex-wrap: wrap; margin: 15px 0;">
+            <img src="image/42.jpg" 
+                 alt="Советские военнопленные — статистика смертности" 
+                 class="book-img" 
+                 style="max-width: 48% !important; min-width: 270px; max-height: 440px !important; width: auto !important; height: auto !important; display: block; margin: 0 auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+            
+            <img src="image/43.jpg" 
+                 alt="Положения Женевской конвенции 1929 года" 
+                 class="book-img" 
+                 style="max-width: 48% !important; min-width: 270px; max-height: 440px !important; width: auto !important; height: auto !important; display: block; margin: 0 auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+          </div>
+
+          <div class="insert-text-desc" style="text-align: center; margin-top: 10px;">
+            В нацистском плену погибло 57,6% советских солдат, тогда как положения Женевской конвенции 1929 г. гитлеровцы намеренно игнорировали.
+          </div>
+        </div>
+
+        <h3 class="section-title" id="sec-camps">Лагеря военнопленных в Пинске</h3>
+        <p>
+          В черные годы фашистской оккупации на территории Пинщины было расположено четыре (по некоторым сведениям пять) лагеря военнопленных. В городе было организовано два лагеря военнопленных: первый – на улице Брестской, в западной части современного Пинска, в полосе микрорайона Загорский и Козляковичи, второй – на улице Лунинецкой, сегодня это восточная окраина города вдоль улицы Иркутско-Пинской Дивизии.
+        </p>
+        <p>
+          Военнопленных массово обрекали на голодную смерть, содержали месяцами под открытым небом раздетыми и разутыми. В пинских лагерях и поблизости фашистские палачи производили массовые казни военнопленных с августа 1941 года по октябрь 1942 года, в результате которых, по архивным данным, было убито свыше 20 тысяч человек.
+        </p>
+        <p>
+          Кровавым пятном на карте города Пинска отметилось еще одно место боли мук советских солдат – пересыльный лагерь военнопленных DULAG-184, который существовал с ноября 1941 г. по 27 августа 1944 г. Некоторое время его местом расположения значатся города Пинск и Борисов, далее сборно-пересыльные пункты отмечены в местах массового пленения советских военнослужащих начального периода войны – под Смоленском и Вязьмой.
+        </p>
+
+        <!-- КОНТЕЙНЕР: СТРАНИЦА 45 КАРТИНКА -->
+        <div class="insert-container doc">
+          <div class="insert-badge">Архивные данные</div>
+          <div class="insert-content-title">Лагеря военнопленных в Пинске</div>
+          
+          <img src="image/45.jpg" 
+               alt="Лагеря военнопленных на ул. Брестской и ул. Лунинецкой" 
+               class="book-img" 
+               style="max-width: 100% !important; max-height: 480px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 18px rgba(0,0,0,0.35);">
+
+          <div class="insert-text-desc" style="text-align: center; margin-top: 10px;">
+            Архивные сведения (НАРБ, ЗГА в Пинске, ГАРФ): лагеря по ул. Брестской и ул. Лунинецкой, где фашисты истребили более 20 тысяч военнопленных.
+          </div>
+        </div>
+
+        <h3 class="section-title" id="sec-punitive-ops">Карательные операции на Пинщине</h3>
+        <p>
+          Наиболее масштабной и кровавой карательной операцией 1941 года на территории Беларуси была операция «Припятские болота». Свое кодовое название она получила по району действия. Каратели прошлись с запада на восток по территории тогдашней Пинской области.
+        </p>
+        <p>
+          <strong>5-й полицейский полк SS</strong>
+        </p>
+
+        <!-- КОНТЕЙНЕР: СТРАНИЦА 52 КАРТИНКА -->
+        <div class="insert-container doc">
+          <div class="insert-badge">Документ палачей</div>
+          <div class="insert-content-title">Итоги кровавой деятельности батальона 15-го полицейского полка</div>
+          
+          <img src="image/52.jpg" 
+               alt="Отчёт 15-го полицейского полка об истреблении 44 837 советских граждан" 
+               class="book-img" 
+               style="max-width: 100% !important; max-height: 520px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 18px rgba(0,0,0,0.35);">
+
+          <div class="insert-text-desc" style="text-align: center; margin-top: 10px;">
+            Журнал боевых действий 3-го батальона 15-го полицейского полка: за 2,5 месяца истреблено 44 837 советских граждан в районе Пинска, Бреста и Кобрина (АЧГК, ф. № 1).
+          </div>
+        </div>
+
+        <p>
+          В этот период нацисты и их пособники предали огню более половины всех установленных на данное время в Пинском районе сожжённых деревень и хуторов. (страница 53)
+        </p>
+
+        <!-- КОНТЕЙНЕР: СТРАНИЦА 53 -->
+       <div class="insert-container doc">
+  <div class="insert-badge">Архивный документ</div>
+  <div class="insert-content-title">
+  </div>
+
+  <img
+    src="image/53.jpg"
+    alt="Список сожжённых деревень Пинского района"
+    class="book-img"
+    style="
+      max-width: 100% !important;
+      max-height: 520px !important;
+      width: auto !important;
+      height: auto !important;
+      display: block;
+      margin: 15px auto;
+      object-fit: contain;
+      border: 1px solid var(--border-wire);
+      box-shadow: 0 4px 18px rgba(0,0,0,.35);
+    "
+  >
+
+  <div class="insert-text-desc" style="text-align:center;">
+    Архивные сведения о населённых пунктах, уничтоженных нацистскими оккупантами.
+  </div>
+</div>
+      </section>
+      <!-- ================= ГЛАВА 4: ТРАГЕДИЯ ЕВРЕЕВ И ГЕТТО ================= -->
+      <section id="tab-holocaust" class="book-page">
+        <h2 class="chapter-title" id="sec-jews-tragedy">Трагедия евреев Пинщины 1941-1944 гг.</h2>
+
+        <!-- КОНТЕЙНЕР: СТРАНИЦА 56 (ВСТРОЕНО) -->
+        <div class="insert-container pic">
+          <div class="insert-badge">Статистика Холокоста</div>
+          <div class="insert-content-title">Масштабы трагедии еврейского населения</div>
+          
+          <img src="image/56.jpg" 
+               alt="Статистика геноцида еврейского населения Беларуси и Пинщины" 
+               class="book-img" 
+               style="max-width: 100% !important; max-height: 480px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 18px rgba(0,0,0,0.35);">
+
+          <div class="insert-text-desc" style="text-align: center; margin-top: 10px;">
+            Всего жертвами геноцида стали 6 млн евреев. На территории Беларуси уничтожено 720 тыс. евреев, в том числе более 25 тысяч — в Пинске и Пинском районе.
+          </div>
+        </div>
+
+        <p>
+          Нацисты относились к евреям с предубеждением и ненавистью, обвиняли их в поражении Германии в Первой мировой войне (1914-1918 гг.), экономическом и политическом кризисах.
+        </p>
+
+        <!-- КОНТЕЙНЕР: СТРАНИЦА 58 (ВСТРОЕНО) -->
+        <div class="insert-container doc">
+          <div class="insert-badge">Показания очевидцев ЧГК</div>
+          <div class="insert-content-title">Публичные казни на городской площади</div>
+          
+          <img src="image/58.jpg" 
+               alt="Показания Вербановича о виселицах на площади" 
+               class="book-img" 
+               style="max-width: 480px !important; width: 100% !important; max-height: 440px !important; display: block; margin: 15px auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+
+          <div class="insert-text-desc" style="text-align: center; margin-top: 10px;">
+            Из показаний В.А. Вербановича: «...увидели виселицу, а на виселице четыре качающихся трупа, женщин и мужчин евреев, через пару дней эти трупы сняли и повесили новых».
+          </div>
+        </div>
+
+        <p>
+          Одновременно с регистрацией городского населения собирались сведения о жителях сельской местности евреев с указанием фамилии, имени, возраста, специальности и семейного положения. Руководители районов и волостей подавали в окружные комиссариаты обобщенные статистические данные о национальном составе населения подведомственной территории.
+        </p>
+        <p>
+          Одному из задержанных, раненному в руку, удалось спрятаться под грудой мёртвых тел, а затем убежать. Когда родственники убитых обратились с просьбой похоронить своих родных, их заставили подписать документы о том, что расстрел совершили отступавшие советские войска. Эти материалы, а также фотографии родителей с телами убитых сыновей немцы использовали в дальнейшем в пропагандистских целях.
+        </p>
+
+        <!-- КОНТЕЙНЕР: СТРАНИЦА 59 (ВСТРОЕНО: ФОТО + АРХИВНАЯ СПРАВКА) -->
+        <div class="insert-container doc">
+          <div class="insert-badge">Архивные материалы и фотохроника</div>
+          <div class="insert-content-title">Первые расправы оккупантов над мирными жителями</div>
+          
+          <div style="display: flex; gap: 15px; justify-content: center; align-items: stretch; flex-wrap: wrap; margin: 15px 0;">
+            <img src="image/5901.jpg" 
+                 alt="Расстрел мирных жителей нацистами у стен домов" 
+                 class="book-img" 
+                 style="max-width: 58% !important; min-width: 280px; max-height: 440px !important; width: auto !important; height: auto !important; display: block; margin: 0 auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+            
+            <img src="image/5902.jpg" 
+                 alt="Показания Р.И. Гречки о расстреле в д. Велесница (ЗГА в Пинске)" 
+                 class="book-img" 
+                 style="max-width: 38% !important; min-width: 250px; max-height: 440px !important; width: auto !important; height: auto !important; display: block; margin: 0 auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+          </div>
+
+          <div class="insert-text-desc" style="text-align: center; margin-top: 10px;">
+            Слева: фотохроника нацистских облав в городе. Справа: показания жителя д. Велесница Р.И. Гречки о расстреле карателями местных жителей Штейманов в июле 1941 г. (ЗГА в Пинске, ф. 118, д. 59а, л. 152).
+          </div>
+        </div>
+
+        <p>
+          На территории западных областей Беларуси в этот период действовала айнзатцгруппа «В» под командованием А. Небе, в составе которой находились зондеркоманды 7а, 7в, айнзатцкоманды 8 и 9, а также спецкоманда «Москва» – особые карательные подразделения, продвигавшиеся с передовыми частями немецкой армии с целью «очистки» территории от евреев и коммунистов.
+        </p>
+        <p>
+          Та же участь постигла евреев и в других деревнях, в том числе в дд. Колодеевичи, Малый Холожин, Паршевичи (современная д. Березовичи).
+        </p>
+
+        <!-- КОНТЕЙНЕР: СТРАНИЦА 60 (ВСТРОЕНО: ВОСПОМИНАНИЯ АРЬЕ ДОЛИНКО) -->
+        <div class="insert-container memo">
+          <div class="insert-badge">Воспоминания очевидца</div>
+          <div class="insert-content-title">Ночные облавы и первые аресты в Пинске</div>
+          
+          <img src="image/60.jpg" 
+               alt="Воспоминания Арье Долинко о ночных облавах" 
+               class="book-img" 
+               style="max-width: 100% !important; max-height: 520px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 18px rgba(0,0,0,0.35);">
+
+          <div class="insert-text-desc" style="text-align: center; margin-top: 10px;">
+            «Я и моя жена Циля проснулись от душераздирающего крика... Эта ночь была длиной в целый год! Избитых привели их на Пробковую фабрику на улице Альбрехтовской...» (Арье Долинко).
+          </div>
+        </div>
+        <!-- ПОКАЗАНИЯ ВЕРБАНОВИЧА -->
+       <div class="insert-container memo">
+  <div class="insert-badge">Показания ЧГК</div>
+  <div class="insert-content-title">
+    Показания Владимира Адамовича Вербановича
+  </div>
+
+  <div style="
+    display:flex;
+    gap:15px;
+    justify-content:center;
+    align-items:flex-start;
+    flex-wrap:wrap;
+    margin:15px 0;
+  ">
+    <img
+      src="image/6801.jpg"
+      alt="Показания Владимира Вербановича"
+      class="book-img"
+      style="
+        max-width:48% !important;
+        min-width:260px;
+        max-height:520px !important;
+        width:auto !important;
+        height:auto !important;
+        display:block;
+        margin:0 auto;
+        object-fit:contain;
+        border:1px solid var(--border-wire);
+        box-shadow:0 4px 15px rgba(0,0,0,.3);
+      "
+    >
+
+    <img
+      src="image/6802.jpg"
+      alt="Продолжение показаний Владимира Вербановича"
+      class="book-img"
+      style="
+        max-width:48% !important;
+        min-width:260px;
+        max-height:520px !important;
+        width:auto !important;
+        height:auto !important;
+        display:block;
+        margin:0 auto;
+        object-fit:contain;
+        border:1px solid var(--border-wire);
+        box-shadow:0 4px 15px rgba(0,0,0,.3);
+      "
+    >
+  </div>
+
+  <div class="insert-text-desc" style="text-align:center;">
+    Показания В. А. Вербановича о преступлениях оккупационной администрации.
+  </div>
+</div>
+        <div class="jude-stamp">JUDE</div>
+        <div class="insert-container doc">
+  <div class="insert-badge">Архивный документ</div>
+  <div class="insert-content-title">
+    Дискриминация, штрафы и санкции
+  </div>
+
+  <img
+    src="image/69.jpg"
+    alt="Документы о дискриминации, штрафах и санкциях"
+    class="book-img"
+    style="
+      max-width:100% !important;
+      max-height:520px !important;
+      width:auto !important;
+      height:auto !important;
+      display:block;
+      margin:15px auto;
+      object-fit:contain;
+      border:1px solid var(--border-wire);
+      box-shadow:0 4px 18px rgba(0,0,0,.35);
+    "
+  >
+
+  <div class="insert-text-desc" style="text-align:center;">
+    Архивные материалы о дискриминации еврейского населения и системе штрафов.
+  </div>
+</div>
+        <p>
+          Все евреи старше 10 лет должны были носить желтые круглые латы на верхней одежде, нашитые слева на груди и спине. Эта визуализация помогала представителям власти издали видеть евреев и контролировать соблюдение ими особых предписаний (не общаться с местными жителями неевреями).
+        </p>
+        <p>
+          Все пинские евреи – мужчины в возрасте от 14 до 60 лет, женщины в возрасте от 16 до 50 лет – обязаны были участвовать в принудительных работах по ремонту и восстановлению военных и гражданских объектов, строительстве деревянного моста через реку Пину, а также железнодорожного моста через реку Ясельду в Городище, уборке улиц и помещений, расчистке снега, работах по благоустройству немецкого кладбища, ассенизационных работах, перевозках различных материалов.
+        </p>
+        <p>
+          Уклонение наказывалось штрафом.
+        </p>
+        <!-- КОНТЕЙНЕР: СТРАНИЦА 71 -->
+        <div class="insert-container doc">
+  <div class="insert-badge">Архивное свидетельство</div>
+  <div class="insert-content-title">
+    Письмо доктора Эльханана Айнбиндера
+  </div>
+
+  <img
+    src="image/71.jpg"
+    alt="Прощальное письмо доктора Эльханана Айнбиндера"
+    class="book-img"
+    style="
+      max-width:100% !important;
+      max-height:540px !important;
+      width:auto !important;
+      height:auto !important;
+      display:block;
+      margin:15px auto;
+      object-fit:contain;
+      border:1px solid var(--border-wire);
+      box-shadow:0 4px 18px rgba(0,0,0,.35);
+    "
+  >
+
+  <div class="insert-text-desc" style="text-align:center;">
+    Архивное письмо, относящееся к событиям периода оккупации.
+  </div>
+</div>
+        <p>
+          Сохранились архивные документы, которые показывают попытки со стороны несчастных женщин, оставшихся после расстрела мужчин-евреев в августе 1941 г. без кормильцев, с малолетним детьми и престарелыми родителями, избежать наказания.
+        </p>
+        <!-- КОНТЕЙНЕРЫ: СТРАНИЦЫ 72, 73 -->
+        <div class="insert-container doc">
+  <div class="insert-badge">Архивное прошение</div>
+  <div class="insert-content-title">
+    Прошение об отмене штрафа
+  </div>
+
+  <img
+    src="image/72.jpg"
+    alt="Прошение об отмене штрафа"
+    class="book-img"
+    style="
+      max-width:100% !important;
+      max-height:540px !important;
+      width:auto !important;
+      height:auto !important;
+      display:block;
+      margin:15px auto;
+      object-fit:contain;
+      border:1px solid var(--border-wire);
+      box-shadow:0 4px 18px rgba(0,0,0,.35);
+    "
+  >
+
+  <div class="insert-text-desc" style="text-align:center;">
+    Архивное заявление жительницы Пинска с просьбой отменить штраф.
+  </div>
+</div>
+        <div class="insert-container doc">
+  <div class="insert-badge">Архивные подлинники</div>
+  <div class="insert-content-title">
+    Рукописные заявления матерей гетто
+  </div>
+
+  <img
+    src="image/73.jpg"
+    alt="Рукописные заявления матерей гетто"
+    class="book-img"
+    style="
+      max-width:100% !important;
+      max-height:560px !important;
+      width:auto !important;
+      height:auto !important;
+      display:block;
+      margin:15px auto;
+      object-fit:contain;
+      border:1px solid var(--border-wire);
+      box-shadow:0 4px 18px rgba(0,0,0,.35);
+    "
+  >
+
+  <div class="insert-text-desc" style="text-align:center;">
+    Рукописные обращения матерей с просьбами освободить их от штрафов.
+  </div>
+</div>
+        <h3 class="section-title" id="sec-ghetto">Пинское гетто</h3>
+        <p>
+          Весной 1942 года в Пинске начались подготовительные работы по созданию гетто – специального огороженного и охраняемого района города для изолированного проживания еврейского населения. В апреле 1942 г. в Пинск принудительно переселили около 700 евреев, в том числе из деревень Пинского района: Жидче, Колбы, Парахонск, Потаповичи и др.
+        </p>
+        <p>
+          Границы гетто проходили по улицам: Завальной, Альбрехтовской, Логишинской, Теодоровской (современные улицы Завальная, Кирова, Первомайская, Гоголя, Партизанская).
+        </p>
+         <!-- КОНТЕЙНЕР: СТРАНИЦЫ 79-80 (ПОКАЗАНИЯ ВЕРБАНОВИЧА И РУДЗИКА) -->
+        <div class="insert-container doc">
+          <div class="insert-badge">Свидетельства очевидцев ЧГК</div>
+          <div class="insert-content-title">Зверства оккупационного режима и полиции в гетто</div>
+          
+          <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin: 15px 0;">
+            <img src="image/79.jpg" 
+                 alt="Показания Вербановича — голод и расстрел ребенка" 
+                 class="book-img" 
+                 style="max-width: 48% !important; min-width: 280px; max-height: 520px !important; width: auto !important; height: auto !important; display: block; margin: 0 auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+            
+            <img src="image/80.jpg" 
+                 alt="Показания Рудзика о зверствах городской полиции" 
+                 class="book-img" 
+                 style="max-width: 48% !important; min-width: 280px; max-height: 520px !important; width: auto !important; height: auto !important; display: block; margin: 0 auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+          </div>
+          <div class="insert-text-desc" style="text-align: center; margin-top: 10px;">
+            Протоколы ЧГК: показания В.А. Вербановича и П.А. Рудзика о бесчинствах полиции и расстрелах мирных жителей у проволочных заграждений гетто.
+          </div>
+        </div>
+
+        <h3 class="section-title" id="sec-mass-executions">Массовые казни</h3>
+        <p>
+          По данным на октябрь 1942 г., в Пинском гетто находились 17 939 чел., из них женщины и дети в возрасте до 14 лет составляли 82%.
+        </p>
+        <!-- КОНТЕЙНЕР: СТРАНИЦА 83 (ВОСПОМИНАНИЯ АРЬЕ ДОЛИНКО) -->
+        <div class="insert-container memo">
+          <div class="insert-badge">Воспоминания узников</div>
+          <div class="insert-content-title">Канун ликвидации Пинского гетто</div>
+          
+          <img src="image/83.jpg" 
+               alt="Воспоминания Арье Долинко о гибели общин" 
+               class="book-img" 
+               style="max-width: 100% !important; max-height: 480px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 18px rgba(0,0,0,0.35);">
+
+          <div class="insert-text-desc" style="text-align: center; margin-top: 10px;">
+            «Уничтожение общин Янова и Погоста было для нас очень тяжелым ударом... угасли последние слабые надежды, что Пинск избежит этой трагедии» (Арье Долинко).
+          </div>
+        </div>
+
+        <h3 class="section-title" id="sec-criminals">Нацистские военные преступники, принимавшие участие в ликвидировании пинского гетто 29 октября – 2 ноября 1942 г.:</h3>
+        <ul class="criminal-list">
+          <li class="criminal-item"><strong>Командир 15-го полицейского полка Эмиль Курске</strong> – в июле 1943 г. был отправлен в отставку, умер 19 декабря 1944 г. в Берлине.</li>
+          <li class="criminal-item"><strong>Командир 2-го батальона 15-го полицейского полка капитан Пауль Ландвер</strong> – погиб 28 февраля 1945 г.</li>
+          <li class="criminal-item"><strong>Адьютант командира 2-го батальона 15-го полицейского полка обер-лейтенант Генрих Плантиус</strong>. После войны – главный комиссар полиции Франкфурта-на-Майне.</li>
+          <li class="criminal-item"><strong>Капитан Кур</strong> – ответственный за боевую подготовку личного состава одного из батальонов 15-го полицейского полка. После войны – комиссар отдела полиции Франкфурта-на-Майне.</li>
+          <li class="criminal-item"><strong>Вахмистр Генрих Гросс</strong> – возглавлял команду, конвоировавшую колонны евреев. После войны проживал во Франкфурта-на-Майне.</li>
+          <li class="criminal-item"><strong>Командир 2-й роты 3-го (310) батальона 15-го полицейского полка Гельмут Заур</strong>, после войны – коммерсант в Нюрнберге-Фюрте.</li>
+          <li class="criminal-item"><strong>Командир 3-го батальона 15-го полицейского полка майор Бруно Холдинг</strong>, умер в декабре 1942 г. в военном госпитале.</li>
+          <li class="criminal-item"><strong>Командир 2-го кавалерийского полка майор Вильгельм Хофман</strong>, после войны жил в Гамбурге.</li>
+          <li class="criminal-item"><strong>Командир 1-го эскадрона капитан Вильгельм Фестринг</strong>, после войны начальник полицейского участка в Гамбурге.</li>
+          <li class="criminal-item"><strong>Командующий охранной полицией и СД в Украине д-р Макс Томас</strong> отвечал за проведение карательных акций в г. Пинске и в Пинском округе, умер после войны под чужим именем.</li>
+          <li class="criminal-item"><strong>Командир охранной полиции и СД в Пинске штурмбаннфюрер СС д-р Пютц</strong>, застрелился 6 мая 1945 г.</li>
+          <li class="criminal-item"><strong>Начальник жандармерии Пинского округа лейтенант Лео Тессман</strong>, местонахождение после войны неизвестно.</li>
+          <li class="criminal-item"><strong>Заместитель окружного комиссара Пинска Альфред Эбнер (1943 г. р.)</strong> – после войны коммерсант, проживал в Штутгарте.</li>
+          <li class="criminal-item"><strong>Окружной комиссар г. Пинска Пауль Гехард Кляйн (1906 г. р.)</strong> – умер 31 декабря 1945г.</li>
+        </ul>
+
+        <h3 class="section-title" id="sec-pogost">Трагедия у деревни Погост-Загородский</h3>
+        <p>
+          До войны в местечке Погост-Загородский проживало более тысячи человек, из них более 800 были евреями. Черную беду принесли летом 1941-го нацисты. С первых дней они сделали жизнь людей невыносимой. А уже 10 августа 1941 года немцы показали свой звериный оскал – расстреляли 130 еврейских мужчин и шесть советских активистов в урочище Малая Долина за д. Камень.
+        </p>
+        <p>
+          Оставшихся трудоспособных евреев-мужчин отправили в рабочий лагерь в Ганцевичи, в Погосте-Загородском оставались около 600 человек – старики, женщины и дети. Осенью 1941 г. все они были заключены в гетто – 18 домов на улице Озёрной в местечке были обнесены колючей проволокой.
+        </p>
+        <p>
+          Полицейские во главе с Андреем Вирковским устраивали обыски и досмотры всех евреев, которых выводили на работы за пределы гетто, отбирая любые средства к существованию. Для устрашения провинившихся перед оккупационными властями сажали в яму на несколько дней без еды и воды.
+        </p>
+        <p>
+          Из расстрельной ямы удалось выбраться лишь трем женщинам: Ривке Ёселевской, Фейгл Луцкой и Юдит Ципперштейт.
+        </p>
+        <!-- КОНТЕЙНЕРЫ: СТРАНИЦЫ 96 И 97 (ПОГОСТ-ЗАГОРОДСКИЙ И РИВКА ЁСЕЛЕВСКАЯ) -->
+        <div class="insert-container doc">
+          <div class="insert-badge">Свидетельство трагедии</div>
+          <div class="insert-content-title">Расправа над детьми в Погосте-Загородском</div>
+          
+          <img src="image/96.jpg" 
+               alt="Расстрел 27 детей около озера в Погосте-Загородском" 
+               class="book-img" 
+               style="max-width: 480px !important; width: 100% !important; max-height: 400px !important; display: block; margin: 15px auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+
+          <div class="insert-text-desc" style="text-align: center; margin-top: 10px;">
+            «...нашли 27 спрятавшихся детей. Всех их вывели и около озера расстреляли».
+          </div>
+        </div>
+
+        <div class="insert-container memo">
+          <div class="insert-badge">Показания на международном процессе</div>
+          <div class="insert-content-title">Свидетельство Ривки Ёселевской о расстреле в Погосте-Загородском</div>
+          
+          <img src="image/97.jpg" 
+               alt="Ривка Ёселевская на процессе в Иерусалиме (1961 г.)" 
+               class="book
+-img" 
+               style="max-width: 100% !important; max-height: 520px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 18px rgba(0,0,0,0.35);">
+
+          <div class="insert-text-desc" style="text-align: center; margin-top: 10px;">
+            Ривка Ёселевская дает показания на суде над нацистским палачом Адольфом Эйхманом в Иерусалиме (1961 г.), рассказывая о расстреле ее семьи в урочище Вяз.
+          </div>
+        </div>
+      </section>
+      <!-- ================= ГЛАВА 5: ПОСЕНИЧИ И ЖЕРТВЫ ================= -->
+ <section id="tab-posenichi" class="book-page">
+        <h2 class="chapter-title" id="sec-posenichi-tragedy">Трагедия у деревни Посеничи</h2>
+        <p>
+          На большой песчаной территории рядом с Посеничами были подготовлены рвы. Когда обреченные на гибель люди увидели подготовленные рвы и вооруженных людей в военной форме, они бросились врассыпную.
+        </p>
+
+        <!-- КОНТЕЙНЕР: ВСТАВКА 61 -->
+        <div class="insert-container doc">
+          <div class="insert-badge">Свидетельство очевидца</div>
+          <div class="insert-content-title">Эрих Мирек на месте расстрела (Стр. 61)</div>
+          <img src="image/61.jpg" alt="Эрих Мирек на месте расстрела у д. Посеничи" class="book-img" style="max-width: 100% !important; max-height: 480px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+          <div class="insert-text-desc" style="text-align: center; margin-top: 10px;">
+            «Благодаря немецкому автослесарю-антифашисту Эриху Миреку, который на следующий день побывал на месте расстрела... мы можем представить картину происшедшего».
+          </div>
+        </div>
+
+        <p>
+          Координацию действий кавалерийских подразделений СС в районе Припятских болот осуществлял обергруппенфюрер СС Эрих Бах-Зелевский. Сохранились сведения о том, что 5 августа 1941г. он лично присутствовал на месте расстрела пинских евреев. Пинчанин Арье Долинко, находившийся в колонне обреченных на расстрел, видел, как на поле сел немецкий самолет и из него вышел грузный высокопоставленный офицер, спокойно наблюдавший за убийством тысяч людей.
+        </p>
+
+        <!-- КОНТЕЙНЕР: ВОСПОМИНАНИЕ 62 -->
+        <div class="insert-container memo">
+          <div class="insert-badge">Воспоминание</div>
+          <div class="insert-content-title">Воспоминания Татьяны Сергеевны Солоневич (Стр. 62)</div>
+          <img src="image/62.jpg" alt="Воспоминания Татьяны Солоневич" class="book-img" style="max-width: 100% !important; max-height: 500px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+          <div class="insert-text-desc" style="text-align: center; margin-top: 10px;">
+            «Было святое воскресенье 10 августа 1941 года... Мужчин загнали в урочище Малая Долина... Стреляли по четыре человека. Никто не кричал...»
+          </div>
+        </div>
+
+        <p>
+          Тем временем ликвидация людей у д. Посеничи шла по-прежнему. В 13.21 командир 2-го кавалерийского полка СС штурмбанфюррер СС Франц Магиль сообщил, что расстрелян 2461 человек. Акция продолжалась. В 18.00 Магиль отправил радиограмму, в которой указал, что за прошедшие четыре с половиной часа расстреляно еще 200 человек. Убийства на этом не закончились. Дело приближалось к сумеркам, гитлеровцы хотели завершить дело до темноты, поэтому решили использовать ручные пулеметы. В этот день были убиты минимум 6500 человек.
+        </p>
+
+        <!-- КОНТЕЙНЕР: ВОСПОМИНАНИЯ 64 -->
+        <div class="insert-container memo">
+          <div class="insert-badge">Итоги расследования</div>
+          <div class="insert-content-title">Комплекс мест массового убийства у д. Посеничи (Стр. 64)</div>
+          <img src="image/64.jpg" alt="Результаты обследования могил у д. Посеничи" class="book-img" style="max-width: 100% !important; max-height: 520px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+        </div>
+
+        <p>
+          Арье Долинко был задет пулей, но сумел спастись. В Пинск вернулись Шимон Шляпочник, Лейбл Любашевский, раненые в ноги Исай Гольцман и Гершель Пинский.
+        </p>
+
+        <!-- КОНТЕЙНЕР: ВСТАВКА 65 -->
+        <div class="insert-container doc">
+          <div class="insert-badge">Сообщение НКГБ</div>
+          <div class="insert-content-title">Попытки немцев ликвидировать следы преступлений (Стр. 65)</div>
+          <img src="image/65.jpg" alt="Сообщение НКГБ БССР № 85 о сожжении трупов" class="book-img" style="max-width: 100% !important; max-height: 500px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+          <div class="insert-text-desc" style="text-align: center; margin-top: 10px;">
+            Сообщение народного комиссара государственной безопасности БССР Цанавы о раскопке и сожжении тел в районе Галево (16 мая 1944 г.).
+          </div>
+        </div>
+
+        <p>
+          10 августа 1941 г. в урочище Малая Долина недалеко от еврейского кладбища было расстреляно 130 мужчин-евреев из Погоста-Загородского и шесть белорусов – активистов советской власти из д. Камень.
+        </p>
+
+        <!-- КОНТЕЙНЕРЫ: ВОСПОМИНАНИЯ 66, СПРАВКА 67 -->
+        <div class="insert-container memo">
+          <div class="insert-badge">Историческая справка</div>
+          <div class="insert-content-title">Судьба нацистских преступников (Стр. 66)</div>
+          <img src="image/66.jpg" alt="Историческая справка о наказании нацистских преступников" class="book-img" style="max-width: 100% !important; max-height: 520px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+        </div>
+        
+        <div class="insert-container doc" id="box-67" style="display: none;">
+          <div class="insert-badge">Документ</div>
+          <div class="insert-content-title">Дополнительные материалы (Стр. 67)</div>
+          <img src="image/67.jpg" alt="Документ стр 67" class="book-img" style="max-width: 100% !important; max-height: 450px !important; margin: 15px auto; display: block;">
+        </div>
+
+        <h3 class="section-title" id="sec-posenichi-stats">Уничтожение следов преступлений и результаты раскопок (Стр. 173)</h3>
+        <p>
+          6 января 1942 года советское правительство впервые на весь мир объявило о том, что на оккупированных территориях творятся чудовищные преступления.
+        </p>
+        <p>
+          «Акция 1005» подразумевала поиск и раскапывание массовых захоронений ранее уничтоженных нацистами и их пособниками людей, сожжение эксгумированных тел на специально устроенных кострах.
+        </p>
+
+        <!-- КОНТЕЙНЕРЫ: СТРАНИЦА 173 ВСТАВКА, СТРАНИЦА 174 КАРТИНКА -->
+        <div class="insert-container doc">
+          <div class="insert-badge">Архивный документ</div>
+          <div class="insert-content-title">Акт эксгумации и обследования могил у д. Посеничи (Стр. 173)</div>
+          <img src="image/173.jpg" alt="Акт эксгумации могил у д. Посеничи" class="book-img" style="max-width: 100% !important; max-height: 480px !important; margin: 15px auto; display: block;">
+        </div>
+        
+        <div class="insert-container pic">
+          <div class="insert-badge">Фотохроника</div>
+          <div class="insert-content-title">Фотоматериалы проведения раскопок комиссией ЧГК (Стр. 174)</div>
+          <img src="image/174.jpg" alt="Фотоматериалы раскопок ЧГК" class="book-img" style="max-width: 100% !important; max-height: 480px !important; margin: 15px auto; display: block;">
+        </div>
+
+        <div class="stats-panel">
+          <h4>Результаты обследования 14 могил у д. Посеничи (1944 г.):</h4>
+          <p style="font-size: 14px; color: #bbb;">
+            Во время расследования 1944 года у деревни Посеничи установлен целый комплекс мест массового убийства мирного населения и военнопленных. Обнаружено 16 могил, в 14 могилах количество жертв было уточено по останкам:
+          </p>
+          <div class="stats-grid">
+            <div class="stats-card">могила 70Х40 – 2800</div>
+            <div class="stats-card">могила 20Х30 – 1900</div>
+            <div class="stats-card">могила 60Х20 – 2900</div>
+            <div class="stats-card">могила 35Х25 – 2200</div>
+            <div class="stats-card">могила 25Х35 – 200</div>
+            <div class="stats-card">могила 40Х40 – 2650</div>
+            <div class="stats-card">могила 15Х10 – 1150</div>
+            <div class="stats-card">могила 17Х15 – 1900</div>
+            <div class="stats-card">могила 45Х35 – 2350</div>
+            <div class="stats-card">могила 10Х5 – 1000</div>
+            <div class="stats-card">могила 35Х20 – 1900</div>
+            <div class="stats-card">могила 15Х5 – 280</div>
+            <div class="stats-card">могила 8Х7 – 130</div>
+            <div class="stats-card">могила 60Х35 – 2640</div>
+          </div>
+          <div class="stats-total-banner">
+            Всего зафиксировано 26 тысяч трупов. Эта цифра и нашла отражение во всех последующих документах, в том числе паспортах воинского захоронения.
+          </div>
+        </div>
+      </section>
+      <!-- ГЛАВА 6: ПРАВЕДНИКИ И ОСТАРБАЙТЕРЫ -->
+      <section id="tab-heroes" class="book-page">
+        <h2 class="chapter-title" id="sec-righteous">Истории спасения евреев Пинщины</h2>
+        <p>
+          Предоставление убежища евреям и даже небольшая помощь евреям в виде лекарств или продуктов питания грозили спасителям смертной казнью. Известно, что семья Диковицких в Альбрехтово была расстреляна после обнаружения в их доме еврейкой девочки Фреди.
+        </p>
+        <p>
+          Государство Израиль учредило почетное звание «Праведник народов мира», присваиваемое за спасение евреев в годы Второй мировой войны, в официальном списке более 900 имён Праведников народов мира из Беларуси, среди них 12 жителей Пинска и Пинского района, удостоенных звания за спасение 18 евреев.
+        </p>
+        <p>
+          Некоторые жители Пинщины, рискуя своей жизнью, смогли помочь уцелеть немногим узникам гетто. По установленным данным, пережить период оккупации смогли около 40 пинских евреев.
+        </p>
+        <ul style="margin-left: 20px; font-size: 15.5px; line-height: 1.8;">
+          <li>Более 20 месяцев <strong>Александра Догмацкая</strong> и её дочь <strong>Янина Яновская (Догмацкая)</strong> прятали в Пинске Маню Шейнберг и её 6-летнюю дочь Реню, кроме того, они предоставили временное убежище Мареку Шейнбергу и Сёме Елинскому, бежавшим из Пинского гетто.</li>
+          <li>Более полутора лет пинчанки <strong>Софья Федоренко</strong> и <strong>Барановская</strong> укрывали Милу Ратновскую с матерью, пекаря Купера с женой, дочерью и племянницей.</li>
+          <li><strong>Мария и Константин Комар</strong> помогли оформить поддельные документы и таким образом спасли узницу Пинского гетто Дину Пэскер, до конца войны она укрывалась в доме священника Петра Тихоцкого в д. Доброславка Пинского района.</li>
+          <li>Пинчанка <strong>Барбара Махайская (Билицкая)</strong> спасла супругов Арье и Цилю Долинко, бежавших из малого гетто.</li>
+          <li>Звание «Праведник народов мира» было присвоено супругам <strong>Владимиру и Донье Дергач</strong> и их дочери <strong>Марии Громыко</strong> за спасение Саши (Иешуа) Найдича, Менделя Шварцблата и Миши Фишмана.</li>
+          <li>Супруги <strong>Юлиан и Мария Касперович</strong> на хуторе недалеко от д. Гривковичи Пинского района укрывали Ошера Сошника, его родственников и других бежавших из Пинского гетто узников.</li>
+          <li>Супруги <strong>Константин и Ольга Букато</strong> прятали на своем хуторе возле д. Лопатино Пинского района семью Премингер (мать и двух дочерей), которые таким образом смогли избежать отправки в Пинское гетто.</li>
+          <li>Семья пинчан <strong>Притулецких</strong> во время оккупации спасла сына узницы Пинского гетто Гришу Резникова.</li>
+          <li><strong>Бронислав Немотко</strong>, рискуя своей жизнью, спас узницу малого гетто г. Пинска Хаю Шерман.</li>
+        </ul>
+
+        <!-- КОНТЕЙНЕР: ВОСПОМИНАНИЯ ХАИ ШЕРМАН (СТР. 102) -->
+        <div class="insert-container memo">
+          <div class="insert-badge">Воспоминание спасенной</div>
+          <div class="insert-content-title">Воспоминания Хаи Шерман о спасении Брониславом Немотко (Стр. 102)</div>
+          <img src="image/102.jpg" alt="Воспоминания Хаи Шерман" class="book-img" style="max-width: 100% !important; max-height: 480px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+          <div class="insert-text-desc" style="text-align: center; margin-top: 10px;">
+            «Бронислав Немотко рисковал не только своей жизнью, но и жизнью своей семьи...»
+          </div>
+        </div>
+
+        <h3 class="section-title" id="sec-ostarbeiter">Вывоз населения на каторжные работы в Германию</h3>
+        <p>
+          В годы Великой Отечественной войны немцы широко применяли практику вывоза людей с оккупированных территорий для работы в Германии. Там их называли остарбайтерами – «восточными рабочими».
+        </p>
+
+        <!-- КОНТЕЙНЕР: СТРАНИЦЫ 109-111 (ТРИ КАРТИНКИ ОСТАРБАЙТЕРОВ) -->
+        <div class="insert-container pic">
+          <div class="insert-badge">Фотодокументы остарбайтеров</div>
+          <div class="insert-content-title">Каторжный труд в Германии (Стр. 109–111)</div>
+          <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 15px 0;">
+            <img src="image/109.jpg" alt="Остарбайтеры стр 109" class="book-img" style="max-width: 32% !important; min-width: 220px; max-height: 420px !important; margin: 0 auto; display: block; border: 1px solid var(--border-wire); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+            <img src="image/110.jpg" alt="Остарбайтеры стр 110" class="book-img" style="max-width: 32% !important; min-width: 220px; max-height: 420px !important; margin: 0 auto; display: block; border: 1px solid var(--border-wire); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+            <img src="image/111.jpg" alt="Остарбайтеры стр 111" class="book-img" style="max-width: 32% !important; min-width: 220px; max-height: 420px !important; margin: 0 auto; display: block; border: 1px solid var(--border-wire); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+          </div>
+          <div class="insert-text-desc" style="text-align: center; margin-top: 10px;">
+            Фотографии, личные документы и трудовые свидетельства жителей Пинщины, угнанных на каторжные работы в Рейх.
+          </div>
+        </div>
+
+        <h3 class="section-title" id="sec-unhuman-conditions">Нечеловеческие условия выживания</h3>
+        <p>
+          Прибывших в Германию остарбайтеров ждали настоящие невольничьи рынки. Людей в буквальном смысле выставляли на продажу. На «товар» приходили посмотреть представители в основном крупных компаний – «Сименс», «Юнкерс», «Хенкель» и других, в которых остро чувствовалась нехватка рабочей силы.
+        </p>
+        <p>
+          Основным документом остарбайтера была «Трудовая книжка для иностранцев», власти вели строгий учет и контроль рабсилы.
+        </p>
+      </section>
+      <!-- ================= ГЛАВА 7: СЕСТРЫ ХАТЫНИ И ЛЮБЕЛЬ-ПОЛЬ ================= -->
+      <section id="tab-villages" class="book-page">
+        <h2 class="chapter-title" id="sec-hatyn-sisters">Полесская сестра Хатыни</h2>
+        <p>
+          Ежегодно 22 марта Беларусь отдает день памяти жертвам Хатыни, сожженным фашистским оккупантами и их пособниками в 1943 году.
+        </p>
+        <p>
+          В Пинском районе на момент подготовки издания установлено 83 деревни и хутора, которые были сожжены нацистами в годы Великой Отечественной войны. Две из них – Семенча и Проходы – не восстановились.
+        </p>
+
+        <h3 class="section-title" id="sec-lubel-pol">Кровавый батальон. Трагедия деревни Любель-Поль</h3>
+
+        <!-- КОНТЕЙНЕР: СТРАНИЦА 127 (ПРОТОКОЛ ДОПРОСА ЖИЛЕВИЧА) -->
+        <div class="insert-container doc">
+          <div class="insert-badge">Архивный документ</div>
+          <div class="insert-content-title">Протокол опроса свидетеля Ф.Ф. Жилевича (Стр. 127)</div>
+          <img src="image/127.jpg" alt="Протокол допроса Ф.Ф. Жилевича" class="book-img" style="max-width: 100% !important; max-height: 520px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+          <div class="insert-text-desc" style="text-align: center; margin-top: 10px;">
+            Протокол опроса Ф.Ф. Жилевича от 7 февраля 1945 г. о сожжении жителей д. Любель-Поль.
+          </div>
+        </div>
+
+        <p>
+          Одной из самых горьких страниц войны в Пинском регионе является история деревни Любель-Поль. Это самая близкая сестра Хатыни по характеру преступления против мирных жителей. По отработанной палачами методичке деревню окружили, людей загнали в жилище и подожгли. Тех, кто сопротивлялся участи быть заживо сожжённым и пытался вырваться из огня, каратели расстреливали. За пару часов в огне и от пуль погибли около 150 жителей Любель-Поля и соседней Вульки – в основном старики, женщины и дети. В документах Национального архива указываются 140 жертв с пометкой «25 домов».
+        </p>
+
+        <!-- КОНТЕЙНЕР: СТРАНИЦЫ 132-133 (ПИСЬМА И АКТЫ) -->
+        <div class="insert-container doc">
+          <div class="insert-badge">Акты расследования</div>
+          <div class="insert-content-title">Материалы расследования трагедии в Любель-Поле (Стр. 132–133)</div>
+          <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin: 15px 0;">
+            <img src="image/132.jpg" alt="Материалы расследования стр 132" class="book-img" style="max-width: 48% !important; min-width: 260px; max-height: 480px !important; margin: 0 auto; display: block; border: 1px solid var(--border-wire); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+            <img src="image/133.jpg" alt="Материалы расследования стр 133" class="book-img" style="max-width: 48% !important; min-width: 260px; max-height: 480px !important; margin: 0 auto; display: block; border: 1px solid var(--border-wire); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+          </div>
+          <div class="insert-text-desc" style="text-align: center; margin-top: 10px;">
+            Архивные акты районной комиссии ЧГК об уничтожении деревни Любель-Поль.
+          </div>
+        </div>
+
+        <h3 class="section-title" id="sec-witnesses-lubel">Воспоминания свидетелей</h3>
+        <!-- (Остальной текст главы оставляем как есть) -->
+      </section>
+      <!-- ================= ГЛАВА 8: ПОКАЗАНИЯ ОЧЕВИДЦЕВ ЧГК ================= -->
+      <section id="tab-witnesses" class="book-page">
+        <h2 class="chapter-title" id="sec-chgk-records">Рассказывают очевидцы</h2>
+ 
+        <!-- КОНТЕЙНЕР: ЦИТАТА 144 -->
+         <div class="insert-container memo">
+          <div class="insert-badge">Официальный документ</div>
+          <div class="insert-content-title">Из протоколов ЧГК по Пинщине, 1945 год</div>
+          <img src="image/144.jpg" alt="Заголовок из протоколов ЧГК" class="book-img" style="max-width: 100% !important; max-height: 450px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+        </div>
+ 
+        <div class="quote-box">
+          <strong>Д. КОНЧИЦЫ</strong><br>
+          Леонтий Лукич Кобринец: «В октябре месяце 1943 года немецкие оккупанты и их сообщник Колб Василий по национальности поляк зверски в деревне Кончицы расстреляли 15 человек, из них 4 женщины. Все они похоронены по отдельных могилах на кладбище в д. Кончицы».
+        </div>
+ 
+        <div class="quote-box">
+          <strong>Д. ДУБОЕ</strong><br>
+          Антон Иванович Сидорович: «В октябре месяце 1943 года немецкие оккупанты расстреляли жителей из д. Беркозы, работающих на железной дороге между дер. Беркозы-Понятичи, 10 человек. Они похоронены были возле железной дороги».
+        </div>
+ 
+        <div class="quote-box">
+          <strong>Д. ЗАВИДЧИЦЫ</strong><br>
+          Лука Кириллович Олейник: «В июне месяце 1943 года немецкие оккупанты расстреляли из дер. Завидчицы четырех мужчин и двух женщин; из дер. Изин Завидчицкого с/с расстреляли 3 человека; из дер. Житновичи расстреляно 2 человека; из дер. Местковичи 2 взрослых 3 детей».
+        </div>
+ 
+        <div class="quote-box">
+          <strong>Д. ХОЙНО</strong><br>
+          Василий Павлович Рогальский: «Злодейски расстреляли в дер. Хойно в сентябре месяце 1943 года 17 мужчин, 10 женщин и 1 ребенка, а всего 28 человек».
+        </div>
+ 
+        <div class="quote-box">
+          <strong>Д. НЕВЕЛЬ</strong><br>
+          Фома Алексеевич Перищук: «В первых числах декабря 1942 года немецкие оккупанты расстреляли в д. Невель 70 человек мужского пола, 64- женского пола и 58 детей, а всего 192 человека».
+        </div>
+ 
+        <div class="quote-box">
+          <strong>Д. ВЫЖЛОВИЧИ</strong><br>
+          Степан Иванович Глинский: «Гражданина из д. Выжловичи Галаховского Ивана застрелили на его санках. В 1943 году в апреле арестовали гр-на из д. Выжловичи Глинского Михаила Андреевича. Глинский М.А. пытался удрать от немцев, но немцы дали залпы с винтовок и застрелили его. В январе 1944 года жителя д. Выжловичи Зирко Алексея немецкие жандармы арестовали и увезли в Пинск в тюрьму, где через месяц он был расстрелян».
+        </div>
+ 
+        <div class="quote-box">
+          <strong>Д. ПОНЯТИЧИ</strong><br>
+          Артем Степанович Маюк: «Точно видел, как немецкие изверги окружили нашу деревню ночью в мае 1943 года и арестовали граждан нашей деревни: 1. Майюк Александр Артемович, 2. Маюк Яков Хомич, 3. Зирко Роман Григорьевич, 4. Литвинчук Роман Иванович, 5. Зирко Сарафина Ивановна, 6. Громада Григорий Никифорович, 7. Громада Артем Никифорович, 8. Кохнюк Иван Саввич. Через два месяца пребывания их в тюрьме немецкие жандармы вывезли их за город под деревню Галево, и там они были расстреляны».
+        </div>
+ 
+        <div class="quote-box">
+          <strong>Д. ХОЛОЖИН МАЛЫЙ</strong><br>
+          Михаил Михайлович Борчун: «Пришли в нашу деревню части войск венгерской армии и арестовали: 1. Дубинец Димитрий Григорьевич, 2. Дубинец Феодосий Димитрович, 3. Дубинец Василий Димитрович, 4. Буката Павел Василевич. Их увели в имение «Корень» в двух км от нашей деревни и там расстреляли. В первые дни оккупации немецкими извергами расстреляны жители нашей деревни: 1. Чортох Завель Лейзорович, 2. Зибельфарб Гершко Лейзорович, 3. Зибельфарб Рива».
+        </div>
+ 
+        <div class="quote-box">
+          <strong>Д. СИНИН</strong><br>
+          Ольга Климовна Володько: «В 1941 году немецкие жандармы арестовали: 1. Володько Николай Андреевич, 2. Володько Корней Андреевич, 3. Володько Федор Андреевич, 4. Вершилович Николай Григорьевич. Возле нашей деревни возле солтусовой хаты расстреляли».
+        </div>
+ 
+        <div class="quote-box">
+          <strong>Д. БАСТЫЧИ</strong><br>
+          Марко Иванович Сульжиц: «В 1944 году в июне немецкие жандармы приехали в нашу деревню и арестовали Грибовича Игнатия и Грибовича Александра и тут же возле их помещения расстреляли из винтовок, трупы которых похоронены через месяц времени. В 1944 году в июне, когда немецкая армия отступала, в нашу деревню пришли венгерские войска и бросили гранату на тов. Сульжица Петра Тарасовича. Убили его и сожгли его в его собственной хате».
+        </div>
+ 
+        <div class="quote-box">
+          <strong>Д. ЛЫЩЕ</strong><br>
+          Зося Рафаиловна Пригодич: «23 февраля 1944 года в д. Лыще вскочили немцы вместе с казаками и убили моего мужа Петра Ануфриевича. Убили односельчанина Кривецкого Ивана, гр. д. Новый Двор Коховца Владимира, ранили Корзуна Юзика. В мае 1944 года, как немцы отступали, за Логишином по дороге в Пинск расстреляли Кулеша Трофима».
+        </div>
+ 
+        <div class="quote-box">
+          <strong>Д. ЛЫЩЕ</strong><br>
+          Кондрат Антонович Кривецкий: «23 февраля 1944 г. в д. Лыще ворвались немцы вместе с казаками, открыли стрельбу, в результате которой убили в болоте около речки моего сына Кривецкого Ивана, Коховца Владимира и ранили Корзуна Юзика. В мае 1944 г. при отступлении по дороге из Логишина в Пинск расстреляли Кулеша Трофима».
+        </div>
+ 
+        <div class="quote-box">
+          <strong>Д. МОКРАЯ ДУБРАВА</strong><br>
+          Иосиф Григорьевич Заяц: «В июле 1943 г. в д. М. Дубрава подъехала машина с немцами. Немцы открыли огонь, в результате которого были убиты гр-не д. М. Дубрава Косьян Петр и Занковец Андрей, были ранены Заяц Фекла Алексеевна, Дубновицкий Федор и Гарманчук Павел. Луцкая Сара, Луцкий Зевель, Абрам и Зевель были расстреляны около Логишина, Луцкий Сроль расстрелян под Ганцевичами. Из. д. Стошаны были арестованы три еврея: Гарбус Самуил, Гарбус Эстра и Гарбус Хана. Судьба их неизвестна».
+        </div>
+ 
+        <div class="quote-box">
+          <strong>М. ПОГОСТ-ЗАГОРОДСК</strong><br>
+          Яков Максимович Иванов: «Осенью 1943 г. на двух авто-машинах в м. Погост-Загородск привезли из разных деревень Логишинского района бывш. сов. активистов, фамилии которых мне не известны. Двенадцать местных активистов раздели, т.е. с некоторых сняли верхнее платье и, подводя по двое к заранее вырытой яме, укладывал их лежа в яму, затем расстреливали в упор, в грудь, и так расстреляли всех 12 мужчин. С ними немцы расстреляли беженку – эвакуированную немцами из г. Великие Луки гр. Москалеву Ксению, 35 лет, за то, что якобы ее муж был в партизанах. Москалева попросила, чтобы и ее детей также положили в могилу. Просьбу ее полиция исполнила, в 3 часа ночи пришли на квартиру за детьми, сказав, что якобы их повезут на подводе с матерью на другую квартиру, одели их и там же около кладбища расстреляли Москалеву Ксению, сына Евгения 3-х лет и Эдуарда 6-ти лет. Всего расстреляно и закопано около кладбища 25 человек белорусов и русских граждан. Весной 1944 г. был повешен в м. Погост-Загородск комендантом полиции Вирковским гр-н из д. Плотница за связь с партизанами».
+        </div>
+ 
+        <div class="quote-box">
+          <strong>Д. КАМЕНЬ</strong><br>
+          Филипп Стефанович Левошко: «Осенью 1941 г. немцы привезли проживавших в м. Погост-Загородск в д. Камень и на рас-нем белье, и всех, подведя к заранее вырытой яме, в затылок из ре-стоянии 300 метров от деревни раздели их, оставив в одном нижнем белье, и всех, подведя к заранее вырытой яме, в затылок из револьверов расстреляли. В это же время немцами были расстреляны 6 белорусов местных».
+        </div>
+ 
+        <div class="quote-box">
+          <strong>Д. МОКРАЯ ДУБРАВА</strong><br>
+          Михаил Григорьевич Щербук: «В конце июля 1943 г. немцы открыли стрельбу, в результате которой были убиты гр. д. М. Дубрава Косьян Петр и Занковец Андрей, были ранены Заяц Фекла, Дубновицкий Федор и Гарманчук Павел. В д. М. Дубрава немцы арестовали 5 евреев, из них 4 были расстреляны в сентябре, а пятый Луцкий Сроль расстрелян под Ганцевичами».
+        </div>
+ 
+        <div class="quote-box">
+          <strong>Д. ДОБРОСЛАВКА</strong><br>
+          Агафия Степановна Доберчук: «В 1943 г. в августе в д. Доброславка немецкий карательный отряд расстрелял 8 человек: Доберчука Ивана Афанасьевича, Кулеша Якова Лукича, Ковалевича Максима Фомича, Дайко ... Осиповича, Борисевича Тимофея Кондратьевича, Уцыховского Лейбу Боруховича, Уцыховскую Рохлю. Уцыховского Завеля».
+        </div>
+ 
+        <div class="quote-box">
+          <strong>Д. СТОШАНЫ</strong><br>
+          Каленик Яковлевич Попитич: «В 1941 г. в июле в д. Стошаны приехали немцы, которые искали евреев. В конце августа полицейские оцепили дома евреев, арестовали их 10 человек, из них 3 детей, вывезли за деревню на расстояние 1 км, в поле расстреляли их: 1. Арбуз Або, 2. Арбуз Фроим, 3. Арбуз Шифра, 4. Арбуз Шмыло, 5. Арбуз Сима, 6. Арбуз Нота и 7. Арбуз Ертко и троих детей».
+        </div>
+ 
+        <div class="quote-box">
+          <strong>Д. ТЕРЕБЕНЬ</strong><br>
+          Федор Харитонович Завацкий: «В 1943 г. в июне приехал в д. Теребень немецкий карательный отряд с целью расправы над мирным населением д. Теребень, в результате чего зажгли хозяйство Кохновича Петра Андреевича вместе с хозяином Кохновичем и его семьей в количестве 6 человек: сам Кохнович П.А., его жена Татьяна и дети в возрасте от 13 до 6 лет».
+        </div>
+      </section>
+ 
+      <!-- ================= ГЛАВА 9: НЮРНБЕРГСКИЙ ТРИБУНАЛ ================= -->
+ <section id="tab-nuremberg" class="book-page">
+        <h2 class="chapter-title" id="sec-nuremberg-docs">В документах международного военного трибунала</h2>
+        <p>
+          2 ноября 1942 года был обнародован Указ Президиума Верховного Совета СССР о создании Чрезвычайной Государственной Комиссии (ЧКГ), целью создания которой было расследование преступлений, совершенных немецко-фашистскими захватчиками и их сторонниками, а также для оценки ущерба, причиненного гражданам, колхозам, общественным организациям и государственным предприятиям.
+        </p>
+        <p>
+          Активное участие в подготовке материалов расследований по Пинску и Пинскому району приняли сотрудники УНКГБ Пинской области, включенные в данные комиссии: старший следователь Михаил Фролович Щенников, капитан госбезопасности Герман Васильевич Толоконин, сотрудник Жабчицкого райотдела Туров.
+        </p>
+        <p>
+          Название города и региона «Пинск» не раз звучало на трибуне самого известного в мире процесса над военными преступниками.
+        </p>
+        <p>
+          Так в обвинительном заключении Международного Военного Трибунала для суда и наказания главных военных преступников европейских стран оси от 06.10.1945 указано: «С 6 сентября по 24 ноября 1942 г. в районе Бреста, Пинска, Кобрина, Дивина, Малориты и Берёзы-Картузской около 400 детей было расстреляно немецкими карательными отрядами…».
+        </p>
+        <p>
+          В заключительной речи главного обвинителя от СССР Р.А. Руденко (стенограмма заседаний Международного Военного Трибунала от 29 и 30 июля 1946 г.) перечисляются многочисленные преступления, совершенные подсудимыми против человечности. Необходимо отметить, что Роман Руденко был прокурором, до назначения главным обвинителем от Советского Союза в Нюрнберге он возглавлял прокуратуру Советской Украины.
+        </p>
+        <p>
+          Под руководством Романа Руденко международному суду представлены значительные документальные материалы, в числе которых факты с упоминанием о военных преступлениях нацистов в Пинске. В обвинении против одного из главных фашистских палачей Эрнста Кальтенбруннера указано:
+        </p>
+
+        <!-- КОНТЕЙНЕР: СТРАНИЦА 184 (НОТА МОЛОТОВА / НЮРНБЕРГ) -->
+        <div class="insert-container doc">
+          <div class="insert-badge">Исторический документ</div>
+          <div class="insert-content-title">Нота Наркома иностранных дел СССР В.М. Молотова (Стр. 184)</div>
+          <img src="image/184.jpg" alt="Нота В.М. Молотова о злодеяниях оккупантов" class="book-img" style="max-width: 100% !important; max-height: 520px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+          <div class="insert-text-desc" style="text-align: center; margin-top: 10px;">
+            Нота Народного комиссара иностранных дел СССР тов. В.М. Молотова о чудовищных злодеяниях немецко-фашистских захватчиков (27 апреля 1942 г.).
+          </div>
+        </div>
+
+        <div class="quote-box">
+          «...30 января 1943 г. подсудимый Эрнст Кальтенбруннер был назначен начальником главного управления полиции безопасности и СД.<br>
+          Вместе с другими учреждениями РСХА Кальтенбруннер принял после Гейдриха пять эйнзатцгрупп. Граждане Советского Союза хорошо помнят эти злодейские организации германского фашизма, возглавленные Кальтенбруннером.<br>
+          ...Эйнзатцгруппа «В» остановилась под Смоленском. Это она сжигала заживо крестьян Белоруссии, расстреливала людей при страшной акции в Пинске, топила тысячи белорусских женщин и детей в мозырских болотах, травила «душегубками» в Минске, ликвидировала гетто в районе Верхних Садков в Смоленске».
+          <span class="quote-author">Из Главного обвинителя от СССР Р.А. Руденко на Нюрнбергском процессе</span>
+        </div>
+
+        <p>
+          Таким образом, благодаря материалам Международного Военного Трибунала, о злодеяниях нацистов и их пособников в Пинском регионе знал весь мир уже в далеком 1946 году. Тогда же, во время Нюрнбергского процесса над военными преступниками, французские прокуроры де Риб и Дубост ввели новое слово для описания масштабных преступлений — «геноцид».
+        </p>
+
+        <!-- КОНТЕЙНЕР: СТРАНИЦА 185 (ЗАЛ ЗАСЕДАНИЙ НЮРНБЕРГСКОГО ТРИБУНАЛА) -->
+        <div class="insert-container pic">
+          <div class="insert-badge">Фотоархив Нюрнберга</div>
+          <div class="insert-content-title">Зал заседаний Международного Военного Трибунала (Стр. 185)</div>
+          <img src="image/185.jpg" alt="Зал заседаний Международного Военного Трибунала в Нюрнберге" class="book-img" style="max-width: 100% !important; max-height: 480px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 18px rgba(0,0,0,0.35);">
+          <div class="insert-text-desc" style="text-align: center; margin-top: 10px;">
+            Главный судебный процесс над нацистскими военными преступниками в Нюрнберге.
+          </div>
+        </div>
+      </section>
+      <!-- ================= ГЛАВА 10: ПОСЛЕВОЕННЫЙ ПЕРИОД И БАНДИТИЗМ ================= -->
+            <!-- ================= ГЛАВА 10: ПОСЛЕВОЕННЫЙ ПЕРИОД И БАНДИТИЗМ ================= -->
+      <section id="tab-postwar" class="book-page">
+        <h2 class="chapter-title" id="sec-postwar-period">Послевоенный период 1944-1952 гг.</h2>
+        <p>
+          С 9 ноября 1944 по 31 декабря 1951 г. в Пинске дислоцировались части и управление 7-й мотострелковой дивизии внутренних войск НКВД. Это подразделение семь лет несло службу по защите территории Пинщины о действий бандформирований и занималось их ликвидацией.
+        </p>
+
+        <h3 class="section-title" id="sec-bchb-trace">СЛЕД НАЦИСТОВ В «БЕЛ-ЧЫРВОНА-БЕЛАЙ» СИМВОЛИКЕ</h3>
+        <p>
+          Напрашивается аналогия с произошедшими в Республике Беларусь событиями августа 2020 года и последующего постэлекторального периода, когда зачастую в авангарде насилия в отношении представителей власти выступали так называемые «светлые лица протеста» - бывшие уголовники и граждане, которые имели проблемы с законом. Нередко подпитываемые идеями нацизма, активные участники силовых действий по свержению действующей власти обозначались символикой БЧБ (от «бел-чырвона-белы»).
+        </p>
+
+        <!-- КОНТЕЙНЕР: СТРАНИЦА 189 -->
+        <div class="insert-container pic">
+          <div class="insert-badge">Исторические материалы</div>
+          <div class="insert-content-title">Использование коллаборационистской символики (Стр. 189)</div>
+          <img src="image/189.jpg" alt="Материалы по символике БЧБ и коллаборационистам" class="book-img" style="max-width: 100% !important; max-height: 480px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+        </div>
+
+        <p>
+          После окончания Великой Отечественной войны БЧБ стал символом белорусских эмигрантских организаций в странах Запада. Костяк этих организаций составляли бывшие гитлеровские пособники, а сами они находились под контролем ЦРУ. Так, БЧБ стал знаменем восстановленной Рады БНР, председателем которой с 1982 по 1997 год был Язэп Сажич, в годы войны проходивший службу в Белорусской народной самопомощи, Белорусской крае-вой обороне, а также служивший комендантом офицерской школы 30-й гренадерской дивизии Ваффен-СС.
+        </p>
+
+        <h3 class="section-title" id="sec-polesskaya-sech">«Полесская сечь» упа на пинщине</h3>
+        <p>
+          В самом начале Великой Отечественной войны на Пинщину зашли соседи с юга – вооруженные отряды украинских националистов. Уже летом 1941 года на Полесье активно действовала националистическая организация «Полесская сечь». Украинской повстанческой армии (УПА), созданная Тарасом Боровцом по прозвищу Бульба. Националисты этого крыла именовались «бульбовцы». Полешуки до сих пор называют воевавших на стороне УПА соотечественников «бульбашами». По сути, «Полесская сечь» выполняла функции вспомогательного формирования на службе немецкой армии.
+        </p>
+
+        <h3 class="section-title" id="sec-terror-acts">Кровавые преступления «борцов с режимом»</h3>
+        <p>
+          Всего к лету 1944 года на территории Беларуси подпольные формирования ОУН (Организации украинских националистов) и УПА насчитывали до 14 тысяч человек. На Пинщине действовал Пинский надрайонный провод ОУН под наименованием «Степь». Кроме его территориальных звеньев были в Пинском районе и особые боевые группы УПА. С сентября 1944 года группа УПА Пинского надрайонного провода ОУН «Верного» совершила 53 теракта.
+        </p>
+
+        <!-- КОНТЕЙНЕР: СТРАНИЦА 193 -->
+        <div class="insert-container doc">
+          <div class="insert-badge">Архивный документ</div>
+          <div class="insert-content-title">Шифротелеграмма Т.А. Мироненко (Стр. 193)</div>
+          <img src="image/193.jpg" alt="Шифротелеграмма Т.А. Мироненко о нападении банды" class="book-img" style="max-width: 100% !important; max-height: 480px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+        </div>
+
+        <div class="quote-box">
+          <strong>Шифротелеграмма секретаря Ивановского райкома КП(б)Б ТА Мироненко секретарю Пинского обкома КП(б)Б АЕ. Клещеву о нападении банды на военнослужащих около д. Дружиловичи 10 декабря 1944 г. Совершенно секретно</strong><br><br>
+          Ночью 8.12.44 г. около деревни Дружиловичи банда напала на воинскую часть, которая шла в Мотовель** ловить дезертиров [в] количестве 20 автоматчиков и трех офицеров. Банда убила гвардии старшего лейтенанта Старобинского Б., кандидата в члены ВКП(б), 55-го запасного полка. Банда ушла в лес. О чем довожу до Вашего сведения.<br>
+          <em>Мироненко</em><br>
+          <small>НАРБ. Ф. 4п. Оп. 39. Д. 80. Л. 107. Подлинник. Рукопись на специальном типографском бланке.<br>**Так в тексте. Имеется в виду д. Мотоль Ивановского р-на Пинской обл.</small>
+        </div>
+
+        <!-- КОНТЕЙНЕР: СТРАНИЦА 195 -->
+        <div class="insert-container doc">
+          <div class="insert-badge">Архивный документ</div>
+          <div class="insert-content-title">Донесение Г.С. Карасева о бандитах УПА (Стр. 195)</div>
+          <img src="image/195.jpg" alt="Донесение Г.С. Карасева о банде бульбовцев в Ласицке" class="book-img" style="max-width: 100% !important; max-height: 480px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+        </div>
+
+
+        <!-- КОНТЕЙНЕР: СТРАНИЦА 201 (ПОРТРЕТ ПРОКУРОРА МОРОЗОВА) -->
+        <div class="insert-container pic">
+          <div class="insert-badge">Историческое фото</div>
+          <div class="insert-content-title">Прокурор Жабчицкого района Виктор Морозов (Стр. 201)</div>
+          <img src="image/201.jpg" alt="Прокурор Виктор Морозов" class="book-img img-small" style="max-width: 300px !important; max-height: 380px !important; width: 100% !important; height: auto !important; display: block; margin: 15px auto; border: 1px solid var(--border-wire); box-shadow: 0 5px 20px rgba(0,0,0,0.35);">
+          <div class="insert-text-desc" style="text-align: center; margin-top: 10px;">
+            Виктор Федорович Морозов (1923–1944) — фронтовик-разведчик, прокурор Жабчицкий районной прокуратуры, павший от рук украинских националистов.
+          </div>
+        </div>
+
+        <!-- (Текст о гибели Морозова) -->
+        <!-- КОНТЕЙНЕР: СТРАНИЦА 205 (ПАМЯТНИК / МОГИЛА МОРОЗОВА) -->
+        <div class="insert-container pic">
+          <div class="insert-badge">Мемориал памяти</div>
+          <div class="insert-content-title">Мемориальная доска и могила В.Ф. Морозова (Стр. 205)</div>
+          <img src="image/205.jpg" alt="Могила и памятник В. Морозову в Молотковичах" class="book-img" style="max-width: 100% !important; max-height: 480px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+          <div class="insert-text-desc" style="text-align: center; margin-top: 10px;">
+            Братская могила и мемориальный знак в агрогородке Молотковичи Пинского района.
+          </div>
+        </div>
+      </section>
+      <!-- ================= ГЛАВА 11: СЛЕДСТВИЕ ГЕНПРОКУРАТУРЫ ================= -->
+     <!-- ================= ГЛАВА 11: СЛЕДСТВИЕ ГЕНПРОКУРАТУРЫ ================= -->
+      <section id="tab-investigation" class="book-page">
+        <h2 class="chapter-title" id="sec-truth-light">Проливая свет истины сквозь времена</h2>
+        <p>
+          Уголовное дело по фактам совершения нацистскими преступниками, их соучастниками, преступными формированиями в ходе Великой Отечественной войны (1941-1945 гг.) и послевоенный период на территории БССР и других государств геноцида белорусского народа было возбуждено в апреле 2021 года. В основу принятого решения были положены сведения о гибели миллионов белорусов и иных лиц вследствие зверств немецких оккупантов и их пособников.
+        </p>
+
+        <!-- КОНТЕЙНЕР: СТРАНИЦА 210 -->
+        <div class="insert-container pic">
+          <div class="insert-badge">Фотохроника следствия</div>
+          <div class="insert-content-title">Работа следственной группы Генпрокуратуры РБ (Стр. 210)</div>
+          <img src="image/210.jpg" alt="Совещание и работа следственной группы Генпрокуратуры" class="book-img" style="max-width: 100% !important; max-height: 480px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+          <div class="insert-text-desc" style="text-align: center; margin-top: 10px;">
+            Генеральная прокуратура Республики Беларусь ведет масштабную работу по расследованию уголовного дела о геноциде белорусского народа.
+          </div>
+        </div>
+
+        <h3 class="section-title" id="sec-logishin-burn">Заживо сожжённые в Логишине</h3>
+        <p>
+          Один из таких трагических эпизодов произошел 9 февраля 1943 года. Каратели решили проучить непокорное население и расправиться с местными жителями, подозреваемыми в связях с партизанами. Зимним вечером фашисты нагрянули в западную часть поселка. В урочище Черный Луг располагались усадьбы семей Гузаревич, Линкевич и Кривопуст. Всех, кто был дома, согнали в сарай и подожгли. Среди заживо сожженных оказались еще житель хутора Козловка И.В. Юшкевич и возвращавшийся из Твердовки К.И. Окинчиц. В семье Линкевич было 7 детей, и все они погибли вместе с матерью. Только отец остался жив, потому что его не оказалось дома в тот момент. Так заживо было сожжено 15 человек, в основном дети и молодежь от 8 до 20 лет.
+        </p>
+
+        <!-- КОНТЕЙНЕР: СТРАНИЦА 213 -->
+        <div class="insert-container pic">
+          <div class="insert-badge">Карта / Аэросъемка</div>
+          <div class="insert-content-title">Схема и аэрофотоснимок места трагедии в Логишине (Стр. 213)</div>
+          <img src="image/213.jpg" alt="Схема и аэрофотоснимок урочища Черный Луг" class="book-img" style="max-width: 100% !important; max-height: 480px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+        </div>
+
+        <h3 class="section-title" id="sec-mem-logishin">Памятный знак в урочище Черный Луг</h3>
+        <p>
+          В 2009 году в Логишине на месте гибели заживо сожженных жителей установили памятный знак. Инициатором его установки стал местный житель Михаил Иосифович Лобачевский – малолетний свидетель чудовищного по своей сути пожара.
+        </p>
+
+        <!-- КОНТЕЙНЕР: СТРАНИЦА 215 -->
+        <div class="insert-container pic">
+          <div class="insert-badge">Мемориал</div>
+          <div class="insert-content-title">Открытие памятного знака в Логишине (Стр. 215)</div>
+          <img src="image/215.jpg" alt="М.И. Лобачевский у памятного знака в Логишине" class="book-img" style="max-width: 100% !important; max-height: 480px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+        </div>
+
+        <h3 class="section-title" id="sec-tereben-tragedy">Трагедия у деревни Теребень</h3>
+        <p>
+          В июле 1943 года в деревне Теребень Бобриковского сельсовета карательным отрядом СС проводились акции устрашения и расправы над мирным населением. Чтобы запугать людей, не согласных с жёсткой политикой оккупационной власти, фашисты и их пособники показательно казнили членов нескольких семей.
+        </p>
+
+        <!-- КОНТЕЙНЕР: СТРАНИЦА 219 -->
+        <div class="insert-container doc">
+          <div class="insert-badge">Архивный документ</div>
+          <div class="insert-content-title">Протокол допроса и материалы по д. Теребень (Стр. 219)</div>
+          <img src="image/219.jpg" alt="Протокол допроса Ф.Х. Завацкого по д. Теребень" class="book-img" style="max-width: 100% !important; max-height: 520px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+        </div>
+
+        <!-- (Показания свидетелей) -->
+
+        <!-- КОНТЕЙНЕР: СТРАНИЦА 220 -->
+        <div class="insert-container doc">
+          <div class="insert-badge">Фильтрационные анкеты</div>
+          <div class="insert-content-title">Архивные анкеты и свидетельства жителей (Стр. 220)</div>
+          <img src="image/220.jpg" alt="Анкета репатрианта и архивные документы" class="book-img" style="max-width: 100% !important; max-height: 520px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; border: 1px solid var(--border-wire); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+        </div>
+      </section>
+ 
+      <!-- ================= ГЛАВА 12: НО ПОМНИТ МИР СПАСЕННЫЙ (РЕЕСТР ПАМЯТИ) ================= -->
+       <!-- ================= ГЛАВА 12: НО ПОМНИТ МИР СПАСЕННЫЙ (РЕЕСТР ПАМЯТИ) ================= --> 
+      <section id="tab-memorial" class="book-page"> 
+        <h2 class="chapter-title" id="sec-memorial-registry">Но помнит мир спасённый</h2> 
+  
+        <!-- ЛОГИШИН -->
+        <h3 class="section-title" id="sec-mem-logishin">Г.П. ЛОГИШИН</h3> 
+        <p> 
+          В августе 1941 года в Логишине гитлеровцы расстреляли более 300 местных жителей еврейской национальности. В 1990 году в городском поселке, восточнее католического кладбища, на братской могиле жертв войны в память о трагедии был установлен обелиск. 
+        </p> 
+        <div class="insert-container pic" style="overflow: hidden; box-sizing: border-box;"> 
+          <div class="insert-content-title">Обелиск на братской могиле жертв войны в г.п. Логишин</div> 
+          <img src="image/логишин.jpg" alt="Памятник в Логишине" class="book-img" style="max-width: 100% !important; max-height: 480px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; object-fit: contain; box-sizing: border-box !important;"> 
+        </div> 
+  
+        <!-- ДУБНОВИЧИ -->
+        <h3 class="section-title" id="sec-mem-dubnovichi">Д. ДУБНОВИЧИ</h3> 
+        <p> 
+          В истории Дубновичей есть черная страница – эта деревня повторила судьбу Хатыни. В 1943 году все 300 ее домов фашисты сожгли дотла. 
+        </p> 
+        <div class="insert-container pic" style="overflow: hidden; box-sizing: border-box;"> 
+          <div class="insert-content-title">Символ сожженной деревни в д. Дубновичи</div> 
+          <img src="image/дубновичи.jpg" alt="Памятник в Дубновичах" class="book-img" style="max-width: 100% !important; max-height: 480px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; object-fit: contain; box-sizing: border-box !important;"> 
+        </div> 
+  
+        <!-- НЕВЕЛЬ -->
+        <h3 class="section-title" id="sec-mem-nevel">Д. НЕВЕЛЬ</h3> 
+        <p> 
+          Трагическая судьба постигла многих жителей д. Невель. 12 декабря 1942 года 176 жителей деревни расстреляли фашистские палачи. В 1949 г. односельчане на их братской могиле установили стелу. В 1981 году память земляков, погибших на фронтах Великой Отечественной войны и ставших жертвами звериной жестокости гитлеровцев, была увековечена в обелиске. 
+        </p> 
+        <div class="insert-container pic" style="overflow: hidden; box-sizing: border-box;"> 
+          <div class="insert-content-title">Обелиск погибшим землякам в д. Невель</div> 
+          <img src="image/невель.jpg" alt="Памятник в Невеле" class="book-img" style="max-width: 100% !important; max-height: 480px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; object-fit: contain; box-sizing: border-box !important;"> 
+        </div> 
+  
+        <!-- ВУЛЬКА ГОРОДИЩЕНСКАЯ -->
+        <h3 class="section-title" id="sec-mem-vulka">Д. ВУЛЬКА ГОРОДИЩЕНСКАЯ</h3> 
+        <p> 
+          Памятник жертвам фашизма в д. Вулька Городищенская напоминает Хатынь – колокол над обелиском звонит по 116 жителям деревни, погибшим от рук гитлеровских палачей и их приспешников в 1943 году. Мемориал был установлен в 1979 году, на плитах высечены имена и фамилии всех убитых мирных сельчан, партизан и воинов-освободителей Вульки Городищенской. Сегодня это один из самых больших памятников жертвам нацистов на территории Пинского района. 
+        </p> 
+        <div class="insert-container pic" style="overflow: hidden; box-sizing: border-box;"> 
+          <div class="insert-content-title">Мемориальный комплекс в д. Вулька Городищенская</div> 
+          <img src="image/вулька.jpg" alt="Мемориал в Вульке Городищенской" class="book-img" style="max-width: 100% !important; max-height: 480px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; object-fit: contain; box-sizing: border-box !important;"> 
+        </div> 
+  
+        <!-- БОКИНИЧИ -->
+        <h3 class="section-title" id="sec-mem-bokinichi">Д. БОКИНИЧИ</h3> 
+        <p> 
+          В 2013 году в деревне Бокиничи был установлен памятник детям – жертвам Второй мировой войны. Инициатором его создания стала представительница старинного рода, уроженка Полесья Тереза Станиславовна Скирмунт. Скорбь о безвинных детях отражена в образе сестры Т.С. Скирмунт Гражины, которая умерла от голода, не дожив до двух лет. Монумент призывает задуматься о трагедии детей, оказавшихся обреченными на смерть в результате жестоких конфликтов, прокатившихся по нашей земле. 
+        </p> 
+        <div class="insert-container pic" style="overflow: hidden; box-sizing: border-box;"> 
+          <div class="insert-content-title">Скульптурная композиция в д. Бокиничи</div> 
+          <img src="image/бокиничи.jpg" alt="Памятник в Бокиничах" class="book-img" style="max-width: 100% !important; max-height: 480px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; object-fit: contain; box-sizing: border-box !important;"> 
+        </div>
+
+        <!-- ОЗАРИЧИ -->
+        <h3 class="section-title" id="sec-mem-ozarichi">Д. ОЗАРИЧИ</h3> 
+        <p> 
+          Деревня известна с XVI века. Одной из трагических страниц ее истории стала Великая Отечественная война: в годы оккупации гитлеровцы расстреляли 63 жителя из деревень Озаричи, Клетная, Соколовка. Жертвы палачей были похоронены в братской могиле в Озаричах, в 1968 г. здесь был установлен обелиск, на мемориальных плитах имена жертв фашизма и 40 воинов-земляков, погибших в боях за Родину. 
+        </p> 
+        <div class="insert-container pic" style="overflow: hidden; box-sizing: border-box;"> 
+          <div class="insert-content-title">Братская могила жертв фашизма в д. Озаричи</div> 
+          <img src="image/озаричи.jpg" alt="Памятник в Озаричах" class="book-img" style="max-width: 100% !important; max-height: 480px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; object-fit: contain; box-sizing: border-box !important;"> 
+        </div> 
+  
+        <!-- КУПЯТИЧИ -->
+        <h3 class="section-title" id="sec-mem-kupyatichi">Д. КУПЯТИЧИ</h3> 
+        <p> 
+          Старинная деревня Купятичи, которая ведет свою летопись с XII века, известная чудотворной Купятицкой иконой Божией Матери и Введенским монастырем, пострадала в годы Великой Отечественной войны: в период оккупации захватчики уничтожили 160 домов, убили более 40 человек. В марте 1943 г. фашисты расстреляли 8 семей советских активистов 33 человека, включая женщин и детей. В 1958 г. на братской могиле погибших была установлена мемориальная плита. 
+        </p> 
+        <div class="insert-container pic" style="overflow: hidden; box-sizing: border-box;"> 
+          <div class="insert-content-title">Памятный знак погибшим активистам в д. Купятичи</div> 
+          <img src="image/купятичи.jpg" alt="Памятник в Купятичах" class="book-img" style="max-width: 100% !important; max-height: 480px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; object-fit: contain; box-sizing: border-box !important;"> 
+        </div> 
+  
+        <!-- ЛЮБЕЛЬ -->
+        <h3 class="section-title" id="sec-mem-lubel">Д. ЛЮБЕЛЬ</h3> 
+        <p> 
+          Братская могила жертв войны на восточной окраине деревни Любель стала местом упокоения 18 мирных сельчан, расстрелянных фашистами в марте 1943 года. В 1977 году здесь был установлен памятник, который отличается от других памятников Пинского района своей композицией: на горельефе изображен мужчина, который своей рукой закрывает женщину от немецких оккупантов, на переднем плане большой траурный венок в знак скорби о погибших. 
+        </p> 
+        <div class="insert-container pic" style="overflow: hidden; box-sizing: border-box;"> 
+          <div class="insert-content-title">Скульптурная композиция «Скорбящий старик» в д. Любель</div> 
+          <img src="image/любель.jpg" alt="Памятник в Любеле" class="book-img" style="max-width: 100% !important; max-height: 480px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; object-fit: contain; box-sizing: border-box !important;"> 
+        </div> 
+  
+        <!-- ПЛОСКИНЬ -->
+        <h3 class="section-title" id="sec-mem-ploskin">Д. ПЛОСКИНЬ</h3> 
+        <p> 
+          В центре деревни стоит памятник землякам, погибшим в годы Великой Отечественной войны. 64 из них пали на полях сражений, 15 мирных жителей – от рук палачей в родном селе. В 1970 году память защитников Отечества и жертв войны была увековечена. 
+        </p> 
+        <div class="insert-container pic" style="overflow: hidden; box-sizing: border-box;"> 
+          <div class="insert-content-title">Обелиск погибшим воинам и мирным жителям в д. Плоскинь</div> 
+          <img src="image/плоскинь.jpg" alt="Памятник в Плоскини" class="book-img" style="max-width: 100% !important; max-height: 480px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; object-fit: contain; box-sizing: border-box !important;"> 
+        </div> 
+  
+        <!-- ПОНЯТИЧИ -->
+        <h3 class="section-title" id="sec-mem-ponyatichi">Д. ПОНЯТИЧИ</h3> 
+        <p> 
+          В 1943 году фашисты расстреляли 14 железнодорожников. Это были работники 5-й дистанции пути Белорусской железной дороги. В 1967 году на месте гибели людей мирной профессии в д. Понятичи у железнодорожного полотна был установлен обелиск – в память о жертвах гитлеровцев в годы Великой Отечественной войны. 
+        </p> 
+        <div class="insert-container pic" style="overflow: hidden; box-sizing: border-box;"> 
+          <div class="insert-content-title">Памятник расстрелянным железнодорожникам в д. Понятичи</div> 
+          <img src="image/понятичи.jpg" alt="Памятник в Понятичах" class="book-img" style="max-width: 100% !important; max-height: 480px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; object-fit: contain; box-sizing: border-box !important;"> 
+        </div> 
+
+        <!-- КЛЕТНАЯ -->
+        <h3 class="section-title" id="sec-mem-kletnaya">Д. КЛЕТНАЯ</h3> 
+        <p> 
+          В 1940 году в д. Клетная Колонского сельсовета Телеханского района Пинской области был создан колхоз им. Карла Маркса. Мирный труд сельчан прервала война. В августе 1941 года оккупанты схватили 12 бывших колхозников, вывели их за деревню и расстреляли. В память о погибших земляках в 1967 году была поставлена стела. 
+        </p> 
+        <div class="insert-container pic" style="overflow: hidden; box-sizing: border-box;"> 
+          <div class="insert-content-title">Памятный знак расстрелянным жителям в д. Клетная</div> 
+          <img src="image/клетная.jpg" alt="Стела в д. Клетная" class="book-img" style="max-width: 100% !important; max-height: 480px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; object-fit: contain; box-sizing: border-box !important;"> 
+        </div> 
+ 
+        <!-- ВЕЛЕСНИЦА -->
+        <h3 class="section-title" id="sec-mem-velesnitsa">Д. ВЕЛЕСНИЦА</h3> 
+        <p> 
+          В самом начале Великой Отечественной войны, в июле 1941 года, фашистскими оккупантами были сожжены две деревни на Пинщине – Велесница и Рудка. После войны жители возродили свои села, в 1968 году в Велеснице был поставлен памятник сожженным деревням как напоминание о страданиях людей и жестокости гитлеровцев. 
+        </p> 
+        <div class="insert-container pic" style="overflow: hidden; box-sizing: border-box;"> 
+          <div class="insert-content-title">Обелиск сожженным деревням Велесница и Рудка</div> 
+          <img src="image/велесница.jpg" alt="Памятник в д. Велесница" class="book-img" style="max-width: 100% !important; max-height: 480px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; object-fit: contain; box-sizing: border-box !important;"> 
+        </div> 
+ 
+        <!-- ЛИСЯТИЧИ -->
+        <h3 class="section-title" id="sec-mem-lisyatichi">Д. ЛИСЯТИЧИ</h3> 
+        <p> 
+          Деревня Лисятичи была полностью уничтожена озверевшими отступающими гитлеровцами в июле 1944 года. Но благодаря жителям она восстала из пепла и поныне живет на краю леса, на берегу озера. В 1968 году в память о трагической истории в Лисятичах был установлен обелиск сожженной деревне. 
+        </p> 
+        <div class="insert-container pic" style="overflow: hidden; box-sizing: border-box;"> 
+          <div class="insert-content-title">Обелиск на месте сожженной деревни Лисятичи</div> 
+          <img src="image/лисятичи.jpg" alt="Обелиск в д. Лисятичи" class="book-img" style="max-width: 100% !important; max-height: 480px !important; width: auto !important; height: auto !important; display: block; margin: 15px auto; object-fit: contain; box-sizing: border-box !important;"> 
+        </div> 
+      </section> 
+    </main>
+  </div>
+ 
+  <!-- ПОСТОЯННЫЙ БЛОК ВЫХОДНЫХ ДАННЫХ ВНИЗУ СТРАНИЦЫ НА ЧЕРНОМ ФОНЕ -->
+  <section class="black-imprint-section" id="site-imprint">
+    <div class="black-imprint-container">
+      <h3>Выходные издательские данные</h3>
+      <p><strong>Главный редактор:</strong> Владимир Шпарло.</p>
+      <p><strong>Технический редактор:</strong> Наталья Васюк.</p>
+      <p><strong>Авторы:</strong> Юрий Бушик, Ирина Еленская, Александр Оржеховский, Евгений Розенблат, Леонид Ярошевич.</p>
+      <p><strong>Корректор:</strong> Федор Рогальский.</p>
+      <hr>
+      <p>Подписано в печать 20.02.2026 г.</p>
+      <p>Формат 70х100 1/16. Бумага мелованная. Печать офсетная. Усл. печ. л. 20,8.</p>
+      <p>Тираж 2200 экз. Зак. Т328.</p>
+      <hr>
+      <p><strong>Общество с ограниченной ответственностью «Рекламно-информационное агенство «Вечерний Брест».</strong></p>
+      <p>Свидетельство о государственной регистрации издателя, изготовителя, распространителя печатных изданий № 1/414 ад 14.08.2014. ул. Комсомольская, 3, оф. 43, 224005, г. Брест.</p>
+      <p><strong>ООО «Юстмаж»</strong>, ул. Калиновского, 6, Г 4/к, комн. 201, 220103, г. Минск. Свидетельство о государственной регистрации издателя, изготовителя, распространителя печатных изданий № 2/68 от 19.03.2014 г.</p>
+      <p>УДК 94 (476.7) "1939/1945"</p>
+      <p>ББК 63.3 (4Беи-4Бре) 622.6</p>
+      <p>Γ34</p>
+      <p><strong>ISBN 978-985-7347-33-9</strong></p>
+      <hr>
+      <p>Издательство РИА «Вечерний Брест» осуществляет выпуск книг, брошюр, буклетов, календарей, визиток, разнообразной рекламной и сувенирной продукции, располагает собственной полиграфической базой и дизайн-студией. Тел. (+375 162) 29-18-08, (+37529) 691-12-26, e-mail: ria@vb.by</p>
+    </div>
+  </section>
+ 
+  <!-- МОДАЛЬНОЕ ОКНО ЖИВОГО ПОИСКА -->
+  <div class="modal-search" id="search-modal" onclick="closeSearchModal(event)">
+    <div class="modal-search-content" onclick="event.stopPropagation()">
+      <h3 style="font-family: 'Montserrat', sans-serif; text-transform: uppercase; margin-bottom: 15px; color: var(--crimson-red);">
+        Полнотекстовый поиск по архиву
+      </h3>
+      <input type="text" id="search-input" class="search-input" placeholder="Введите имя, деревню, дату или ключевое слово (например: Корж, Посеничи, 1941, Морозов)..." oninput="performSearch()">
+      <div class="search-results" id="search-results">
+        <div style="font-size: 13px; color: #888;">Введите поисковый запрос...</div>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- ФУТЕР -->
+  <footer>
+    <p>Историко-документальный электронный архив <strong>«Пинск и Пинский район. Геноцид 1941–1952»</strong></p>
+    <p style="margin-top: 8px; font-size: 11px; opacity: 0.6;">Все материалы соответствуют оригинальному печатному изданию (ISBN 978-985-7347-33-9)</p>
+  </footer>
+ 
+  <!-- TOAST УВЕДОМЛЕНИЕ -->
+  <div id="toast"></div>
+ 
+  <!-- Подключение внешнего файла скриптов -->
+  <script type="text/javascript" src="js/scripts.js"></script>
+</body>
+</html>
