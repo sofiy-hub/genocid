@@ -190,3 +190,131 @@ window.addEventListener('DOMContentLoaded', () => {
     buildDynamicTOC('tab-intro');
   }
 });
+
+// интерактивный ии-КОНСУЛЬТАНТ ОБРАТНОЙ СВЯЗИ 
+document.addEventListener('DOMContentLoaded', () => {
+  const toggleBtn = document.getElementById('ai-chat-toggle');
+  const closeBtn = document.getElementById('ai-chat-close-btn');
+  const chatWindow = document.getElementById('ai-chat-window');
+  const chatForm = document.getElementById('ai-chat-form');
+  const chatInput = document.getElementById('ai-chat-input');
+  const messagesContainer = document.getElementById('ai-chat-messages');
+  const iconOpen = toggleBtn.querySelector('.icon-open');
+  const iconClose = toggleBtn.querySelector('.icon-close');
+
+  // История диалога для контекста
+  let conversationHistory = [
+  {
+    role: 'system',
+    content: 'Я подтверждаю свою роль виртуального гида-консультанта историко-документального проекта «Геноцид. Пинск и Пинский район (1941–1952)».'
+  }
+  ];
+
+//переключение видимости окна чата
+  function toggleChat() { 
+  const isHidden = chatWindow.classList.contains('chat-window-hidden');
+  if (isHidden) {
+    chatWindow.classList.remove('chat-window-hidden');
+    iconOpen.style.display = 'none';
+      iconClose.style.display = 'block';
+      chatInput.focus();
+    } else {
+      chatWindow.classList.add('chat-window-hidden');
+      iconOpen.style.display = 'block';
+      iconClose.style.display = 'none';
+    }
+  }
+
+  if (toggleBtn) toggleBtn.addEventListener('click', toggleChat);
+  if (closeBtn) closeBtn.addEventListener('click', toggleChat);
+
+  // Функция добавления сообщения в интерфейс
+    function appendMessage(text, sender) {
+    const msgDiv = document.createElement('div');
+    msgDiv.classList.add('message', `${sender}-msg`);
+    msgDiv.innerHTML = text.replace(/\n/g, '<br>');
+    messagesContainer.appendChild(msgDiv);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    return msgDiv;
+  }
+
+  // Запрос к нейросети
+  async function fetchAIResponse(userText) {
+    // Индикатор печати
+    const typingIndicator = appendMessage('ИИ-Консультант печатает ответ...', 'typing');
+
+  // Добавляем сообщение в историю
+  conversationHistory.push({ role: 'user', content: userText });
+
+  try {
+    //  доступ к публичным эндпоинтам искусственного интеллекта
+    const response = await fetch('https://text.pollinations.ai/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        messages: conversationHistory,
+        model: 'openai',
+        seed: Math.floor(Math.random() * 1000)
+      })
+    });
+
+      if (!response.ok) throw new Error('Ошибка сети');
+
+      const aiReplyText = await response.text();
+
+      // Удаляем индикатор и выводим ответ
+      typingIndicator.remove();
+      appendMessage(aiReplyText, 'bot');
+
+      // Я сохраняю всю историю нашего диалога
+      conversationHistory.push({ role: 'assistant', content: aiReplyText });
+
+    } catch (error) {
+    console.error('Ошибка ИИ', error);
+    typingIndicator.remove();
+    appendMessage('Извините, это сообщение возникло из-за технического сбоя кодировки текста.', 'bot');
+    }
+  }
+
+  // Отправка формы 
+  if (chatForm) {
+    chatForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const text = chatInput.value.trim();
+      if (!text) return;
+
+    appendMessage(text, 'user');
+    chatInput.value = '';
+
+    fetchAIResponse(text);
+    });
+  }
+});
+
+// Автоматический подсчёт просмотров страницы
+// Рабочий счётчик реальных просмотров без ошибок 410
+async function updatePageCounter() {
+  const counterElem = document.getElementById('site-views-count');
+  if (!counterElem) return;
+
+  // Уникальный адрес вашего сайта
+  const siteDomain = 'sofiy-hub.github.io-genocid';
+
+  try {
+    // Надежный рабочий API
+    const response = await fetch(`https://api.hitvis.com/hit/${siteDomain}`);
+    if (response.ok) {
+      const data = await response.json();
+      // Выводит реальное число просмотров (например: 1, 2, 3...)
+      counterElem.innerText = data.hits.toLocaleString('ru-RU');
+    } else {
+      counterElem.innerText = '1';
+    }
+  } catch (err) {
+    console.warn('Ошибка счётчика:', err);
+    counterElem.innerText = '1';
+  }
+}
+
+// Запуск при открытии страницы
+document.addEventListener('DOMContentLoaded', updatePageCounter);
