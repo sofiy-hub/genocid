@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -77,6 +77,14 @@
         <button class="drawer-nav-btn" onclick="switchTab('tab-memorial', this)">12. Но помнит мир спасённый</button>
       </div>
     </div>
+    <!-- СЧЁТЧИК ПРОСМОТРОВ -->
+<div class="site-views-counter">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+    <circle cx="12" cy="12" r="3"></circle>
+  </svg>
+  <span>Просмотров сайта: <strong id="site-views-count">...</strong></span>
+</div>
   </aside>
   <!-- HERO COVER (ОБЛОЖКА КНИГИ) -->
   <header class="hero-cover">
@@ -143,7 +151,7 @@
       <section id="tab-war" class="book-page">
         <h2 class="chapter-title" id="sec-war-start">Начало войны</h2>
 
-        <h3 class="section-title" id="sec-zhabchitsy">Авиаудар по аэродрому в Жабчицах</h3>
+        <h3 class="section-title" id="sec-zhabchitsy">Авиаудар по аэродрому в жабчицах</h3>
         <p>
           Город Пинск и Пинщина одни из первых попали под удар военной машины нацистской Германии. Согласно справке местных органов власти, от бомбежки немецкой авиации в ходе авианалетов 22 июня 1941 г. в Жабчицах было сожжено 40 крестьянских домов, погибло 30 местных жителей. Эти данные отражены в актах расследования злодеяний немецких-фашистских захватчиков и их пособников.
         </p>
@@ -841,22 +849,6 @@
           <p style="font-size: 14px; color: #bbb;">
             Во время расследования 1944 года у деревни Посеничи установлен целый комплекс мест массового убийства мирного населения и военнопленных. Обнаружено 16 могил, в 14 могилах количество жертв было уточено по останкам:
           </p>
-          <div class="stats-grid">
-            <div class="stats-card">могила 70Х40 – 2800</div>
-            <div class="stats-card">могила 20Х30 – 1900</div>
-            <div class="stats-card">могила 60Х20 – 2900</div>
-            <div class="stats-card">могила 35Х25 – 2200</div>
-            <div class="stats-card">могила 25Х35 – 200</div>
-            <div class="stats-card">могила 40Х40 – 2650</div>
-            <div class="stats-card">могила 15Х10 – 1150</div>
-            <div class="stats-card">могила 17Х15 – 1900</div>
-            <div class="stats-card">могила 45Х35 – 2350</div>
-            <div class="stats-card">могила 10Х5 – 1000</div>
-            <div class="stats-card">могила 35Х20 – 1900</div>
-            <div class="stats-card">могила 15Х5 – 280</div>
-            <div class="stats-card">могила 8Х7 – 130</div>
-            <div class="stats-card">могила 60Х35 – 2640</div>
-          </div>
           <div class="stats-total-banner">
             Всего зафиксировано 26 тысяч трупов. Эта цифра и нашла отражение во всех последующих документах, в том числе паспортах воинского захоронения.
           </div>
@@ -1126,7 +1118,6 @@
         </div>
       </section>
       <!-- ================= ГЛАВА 10: ПОСЛЕВОЕННЫЙ ПЕРИОД И БАНДИТИЗМ ================= -->
-            <!-- ================= ГЛАВА 10: ПОСЛЕВОЕННЫЙ ПЕРИОД И БАНДИТИЗМ ================= -->
       <section id="tab-postwar" class="book-page">
         <h2 class="chapter-title" id="sec-postwar-period">Послевоенный период 1944-1952 гг.</h2>
         <p>
@@ -1203,7 +1194,6 @@
         </div>
       </section>
       <!-- ================= ГЛАВА 11: СЛЕДСТВИЕ ГЕНПРОКУРАТУРЫ ================= -->
-     <!-- ================= ГЛАВА 11: СЛЕДСТВИЕ ГЕНПРОКУРАТУРЫ ================= -->
       <section id="tab-investigation" class="book-page">
         <h2 class="chapter-title" id="sec-truth-light">Проливая свет истины сквозь времена</h2>
         <p>
@@ -1267,7 +1257,6 @@
       </section>
  
       <!-- ================= ГЛАВА 12: НО ПОМНИТ МИР СПАСЕННЫЙ (РЕЕСТР ПАМЯТИ) ================= -->
-       <!-- ================= ГЛАВА 12: НО ПОМНИТ МИР СПАСЕННЫЙ (РЕЕСТР ПАМЯТИ) ================= --> 
       <section id="tab-memorial" class="book-page"> 
         <h2 class="chapter-title" id="sec-memorial-registry">Но помнит мир спасённый</h2> 
   
@@ -1450,6 +1439,58 @@
  
   <!-- TOAST УВЕДОМЛЕНИЕ -->
   <div id="toast"></div>
+
+  <!-- ================= ПЛАВАЮЩИЙ ИИ-ЧАТ ОБРАТНОЙ СВЯЗИ ================= -->
+<div id="ai-chat-widget">
+  <!-- Закрепленная кнопка в углу экрана -->
+  <button id="ai-chat-toggle" title="Задать вопрос ИИ-консультанту">
+    <svg class="icon-open" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+      <circle cx="9" cy="10" r="1" fill="currentColor"></circle>
+      <circle cx="12" cy="10" r="1" fill="currentColor"></circle>
+      <circle cx="15" cy="10" r="1" fill="currentColor"></circle>
+    </svg>
+    <svg class="icon-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:none;">
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+    <span class="chat-badge-pulse"></span>
+  </button>
+  <!-- Окно чата с ИИ -->
+  <div id="ai-chat-window" class="chat-window-hidden">
+    <div class="chat-header">
+      <div class="chat-header-info">
+        <div class="avatar-status">
+          <span class="avatar-icon">🏛️</span>
+          <span class="online-dot"></span>
+        </div>
+        <div>
+          <h4>ИИ-Консультант проекта</h4>
+          <span class="status-text">Онлайн | Поиск информации...</span>
+        </div>
+      </div>
+      <button id="ai-chat-close-btn">&times;</button>
+    </div>
+    <!-- Область сообщений -->
+    <div id="ai-chat-messages" class="chat-messages">
+      <div class="message system-msg">
+        Здравствуйте! Я виртуальный ассистент историко-документального проекта «Геноцид. Пинск и Пинский район».
+        <br><br>
+        Задайте мне любой вопрос о событиях 1941–1952 гг., Пинском гетто, памятниках или любой другой интересующий вас вопрос!
+      </div>
+    </div>
+    <!-- Поле ввода -->
+    <form id="ai-chat-form" class="chat-input-area">
+      <input type="text" id="ai-chat-input" placeholder="Задайте ваш вопрос..." autocomplete="off" required />
+      <button type="submit" id="ai-chat-send">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+      </button>
+    </form>
+  </div>
+</div>
  
   <!-- Подключение внешнего файла скриптов -->
   <script type="text/javascript" src="js/scripts.js"></script>
