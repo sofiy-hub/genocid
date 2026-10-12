@@ -297,7 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const counterVal = document.getElementById('real-counter-val');
   if (!counterVal) return;
 
-  // Берёт число из памяти или начинает с 1250, увеличивая при каждом новом визите
+  // Берёт число из памяти или начинает с 1, увеличивая при каждом новом визите
   let views = localStorage.getItem('genocid_site_views');
   if (!views) {
     views = 1; // Стартовое число
