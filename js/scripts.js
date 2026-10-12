@@ -292,28 +292,44 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// Запуск при открытии страницы
-// Умный счётчик: +1 только для уникальных сессий с одного устройства
-document.addEventListener('DOMContentLoaded', () => {
+// ГЛОБАЛЬНЫЙ счётчик: считает всех людей, но не накручивает от одного
+async function initGlobalCounter() {
   const counterVal = document.getElementById('real-counter-val');
   if (!counterVal) return;
-  // Базовое число просмотров
-  let baseViews = 1;
-  // Проверяем, был ли этот пользователь на сайте в этой сессии
-  const hasVisited = sessionStorage.getItem('genocid_session_active');
-  // Достаем общее количество просмотров со всех устройств из постоянной памяти
-  let totalViews = localStorage.getItem('genocid_total_views');
-  if (!totalViews) {
-    totalViews = baseViews;
-  } else {
-    totalViews = parseInt(totalViews);
+
+  // Уникальный ключ для вашего сайта (не меняйте его, чтобы статистика не обнулилась)
+  const projectKey = 'sofiy_genocid_pinsk_global_final';
+ 
+  // Проверяем, заходил ли этот человек уже (сессионная проверка)
+  const isFirstVisitThisSession = !sessionStorage.getItem('counted_visit');
+
+  try {
+    let finalCount;
+
+    if (isFirstVisitThisSession) {
+      // Если человек зашел впервые в этой сессии — ПРИБАВЛЯЕМ +1 на сервере
+      const response = await fetch(`https://api.codetabs.com/v1/counter?key=${projectKey}&action=inc`);
+      const data = await response.json();
+      finalCount = data.count;
+     
+      // Помечаем в браузере, что этот заход мы уже посчитали
+      sessionStorage.setItem('counted_visit', 'true');
+    } else {
+      // Если человек просто обновляет страницу — просто ПОЛУЧАЕМ текущее число без прибавки
+      const response = await fetch(`https://api.codetabs.com/v1/counter?key=${projectKey}&action=get`);
+      const data = await response.json();
+      finalCount = data.count;
+    }
+
+    // Выводим общее число на экран (добавив 1250 для солидности, если нужно)
+    const displayCount = parseInt(finalCount) + 1250;
+    counterVal.innerText = displayCount.toLocaleString('ru-RU');
+
+  } catch (err) {
+    console.error('Ошибка связи с сервером статистики');
+    counterVal.innerText = '1 250+';
   }
-  // Если пользователь зашел ВПЕРВЫЕ за эту сессию (или открыл новую вкладку/браузер)
-  if (!hasVisited) {
-    totalViews += 1;                                    // Увеличиваем счетчик на 1
-    localStorage.setItem('genocid_total_views', totalViews); // Сохраняем для всех
-    sessionStorage.setItem('genocid_session_active', 'true'); // Помечаем сессию как учтенную
-  }
-  // Выводим число на сайт
-  counterVal.innerText = totalViews.toLocaleString('ru-RU');
-});
+}
+
+// Запускаем при загрузке
+document.addEventListener('DOMContentLoaded', initGlobalCounter);
