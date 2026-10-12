@@ -291,30 +291,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Автоматический подсчёт просмотров страницы
-// Рабочий счётчик реальных просмотров без ошибок 410
-async function updatePageCounter() {
-  const counterElem = document.getElementById('site-views-count');
-  if (!counterElem) return;
-
-  // Уникальный адрес вашего сайта
-  const siteDomain = 'sofiy-hub.github.io-genocid';
-
-  try {
-    // Надежный рабочий API
-    const response = await fetch(`https://api.hitvis.com/hit/${siteDomain}`);
-    if (response.ok) {
-      const data = await response.json();
-      // Выводит реальное число просмотров (например: 1, 2, 3...)
-      counterElem.innerText = data.hits.toLocaleString('ru-RU');
-    } else {
-      counterElem.innerText = '1';
-    }
-  } catch (err) {
-    console.warn('Ошибка счётчика:', err);
-    counterElem.innerText = '1';
-  }
-}
 
 // Запуск при открытии страницы
-document.addEventListener('DOMContentLoaded', updatePageCounter);
+document.addEventListener('DOMContentLoaded', () => {
+  const toggleBtn = document.getElementById('ai-chat-toggle');
+  const chatWindow = document.getElementById('ai-chat-window');
+});
