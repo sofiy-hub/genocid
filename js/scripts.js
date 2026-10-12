@@ -291,7 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-
+/*
  const siteUrl = 'https://your_github_username.github.io/YOUR_REPO_NAME';
 
   fetch(https://seeyoufarm.com{encodeURIComponent(siteUrl)}&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)
@@ -313,3 +313,4 @@ document.addEventListener('DOMContentLoaded', () => {
     .catch(() => {
       document.getElementById('visits').innerText = '1';
     });
+*/
