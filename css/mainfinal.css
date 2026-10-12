@@ -1056,7 +1056,7 @@ footer strong {
 	}
 }
 
-/* Красивый стиль для счётчика просмотров */
+/* Красивый стиль для счётчика просмотров 
 .site-views-counter {
 	display: inline-flex;
 	align-items: center;
@@ -1064,7 +1064,7 @@ footer strong {
 	padding: 8px 16px;
 	background: #1a1a1a;
 	color: #dddddd;
-	border: 1px solid #8b0000; /* Бордовая рамка */
+	border: 1px solid #8b0000;
 	border-radius: 20px;
 	font-family: inherit;
 	font-size: 14px;
@@ -1081,3 +1081,4 @@ footer strong {
 	font-size: 15px;	
 	margin-left: 2px;
 }
+*/
