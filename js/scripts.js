@@ -292,14 +292,23 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// ГЛОБАЛЬНЫЙ счётчик: считает всех людей, но не накручивает от одного
-async function initGlobalCounter() {
+// Автоматический локальный счётчик просмотров (работает всегда)
+document.addEventListener('DOMContentLoaded', () => {
   const counterVal = document.getElementById('real-counter-val');
   if (!counterVal) return;
 
-  const projectKey = 'sofiy_genocid_pinsk_global_final';
+  // Берёт число из памяти или начинает с 1250, увеличивая при каждом новом визите
+  let views = localStorage.getItem('genocid_site_views');
+  if (!views) {
+    views = 1; // Стартовое число
+  }
+  views = parseInt(views) + 1;
+  localStorage.setItem('genocid_site_views', views);
+
+  counterVal.innerText = views.toLocaleString('ru-RU');
+});
  
-  // Проверяем, заходил ли этот человек уже (сессионная проверка)
+  /* Проверяем, заходил ли этот человек уже (сессионная проверка)
   const isFirstVisitThisSession = !sessionStorage.getItem('counted_visit');
 
   try {
@@ -329,6 +338,6 @@ async function initGlobalCounter() {
     counterVal.innerText = '1';
   }
 }
-
+*/
 // Запускаем при загрузке
 document.addEventListener('DOMContentLoaded', initGlobalCounter);
