@@ -297,7 +297,6 @@ async function initGlobalCounter() {
   const counterVal = document.getElementById('real-counter-val');
   if (!counterVal) return;
 
-  // Уникальный ключ для вашего сайта (не меняйте его, чтобы статистика не обнулилась)
   const projectKey = 'sofiy_genocid_pinsk_global_final';
  
   // Проверяем, заходил ли этот человек уже (сессионная проверка)
@@ -315,19 +314,19 @@ async function initGlobalCounter() {
       // Помечаем в браузере, что этот заход мы уже посчитали
       sessionStorage.setItem('counted_visit', 'true');
     } else {
-      // Если человек просто обновляет страницу — просто ПОЛУЧАЕМ текущее число без прибавки
+      // ПОЛУЧАЕМ текущее число без прибавки
       const response = await fetch(`https://api.codetabs.com/v1/counter?key=${projectKey}&action=get`);
       const data = await response.json();
       finalCount = data.count;
     }
 
     // Выводим общее число на экран (добавив 1250 для солидности, если нужно)
-    const displayCount = parseInt(finalCount) + 1250;
+    const displayCount = parseInt(finalCount) + 1;
     counterVal.innerText = displayCount.toLocaleString('ru-RU');
 
   } catch (err) {
     console.error('Ошибка связи с сервером статистики');
-    counterVal.innerText = '1 250+';
+    counterVal.innerText = '1';
   }
 }
 
