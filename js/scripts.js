@@ -294,6 +294,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Запуск при открытии страницы
 document.addEventListener('DOMContentLoaded', () => {
-  const toggleBtn = document.getElementById('ai-chat-toggle');
-  const chatWindow = document.getElementById('ai-chat-window');
+  const counterVal = document.getElementById('real-counter-val');
+  if (!counterVal) return;
+  let views = localStorage.getItem('genocid_site_views');
+  if (!views) {
+    views = 1; // Стартовое число
+  }
+  views = parseInt(views) + 1;
+  localStorage.setItem('genocid_site_views', views);
+  counterVal.innerText = views.toLocaleString('ru-RU');
 });
