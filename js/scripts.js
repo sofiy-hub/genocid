@@ -291,3 +291,25 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+
+ const siteUrl = 'https://your_github_username.github.io/YOUR_REPO_NAME';
+
+  fetch(https://seeyoufarm.com{encodeURIComponent(siteUrl)}&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)
+    .then(() => {
+      // Получаем актуальное число просмотров в формате JSON
+      return fetch('https://seeyoufarm.com{encodeURIComponent(siteUrl)}');
+    })
+    .then(res => res.text())
+    .then(svgText => {
+      // Так как сервис отдает SVG-картинку, этот регулярный скрипт вытаскивает из нее саму цифру
+      const match = svgText.match(/<text[^>]*>([\d\s]+)</text>/g);
+      if (match && match.length > 1) {
+        const count = match[1].replace(/</?[^>]+(>|$)/g, "").trim();
+        document.getElementById('visits').innerText = count;
+      } else {
+        document.getElementById('visits').innerText = '1';
+      }
+    })
+    .catch(() => {
+      document.getElementById('visits').innerText = '1';
+    });
