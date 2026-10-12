@@ -293,14 +293,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // Запуск при открытии страницы
+// Умный счётчик: +1 только для уникальных сессий с одного устройства
 document.addEventListener('DOMContentLoaded', () => {
   const counterVal = document.getElementById('real-counter-val');
   if (!counterVal) return;
-  let views = localStorage.getItem('genocid_site_views');
-  if (!views) {
-    views = 1; // Стартовое число
+  // Базовое число просмотров
+  let baseViews = 1;
+  // Проверяем, был ли этот пользователь на сайте в этой сессии
+  const hasVisited = sessionStorage.getItem('genocid_session_active');
+  // Достаем общее количество просмотров со всех устройств из постоянной памяти
+  let totalViews = localStorage.getItem('genocid_total_views');
+  if (!totalViews) {
+    totalViews = baseViews;
+  } else {
+    totalViews = parseInt(totalViews);
   }
-  views = parseInt(views) + 1;
-  localStorage.setItem('genocid_site_views', views);
-  counterVal.innerText = views.toLocaleString('ru-RU');
+  // Если пользователь зашел ВПЕРВЫЕ за эту сессию (или открыл новую вкладку/браузер)
+  if (!hasVisited) {
+    totalViews += 1;                                    // Увеличиваем счетчик на 1
+    localStorage.setItem('genocid_total_views', totalViews); // Сохраняем для всех
+    sessionStorage.setItem('genocid_session_active', 'true'); // Помечаем сессию как учтенную
+  }
+  // Выводим число на сайт
+  counterVal.innerText = totalViews.toLocaleString('ru-RU');
 });
